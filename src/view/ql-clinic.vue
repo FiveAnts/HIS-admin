@@ -8,7 +8,7 @@
 						<div class="user-img">
 							<img src="../assets/image/logo03.png">
 							<div class="clinic-uploder">
-								<button type="button" class="el-button filter-item el-button--priamary" style="margin-top:10px;">
+								<button type="button" class="ql-button el-button filter-item el-button--priamary" style="margin-top:10px;">
 									<i class="el-icon-upload2"></i>
 									修改logo
 								</button>
@@ -44,7 +44,7 @@
 				</el-col>
 				<el-col :xs="24" :sm="24" :md="24" :lg="24">
 					<el-table :data="tableData" border style="width: 100%">
-					    <el-table-column  prop="number" label="编号" width="70">
+					    <el-table-column  prop="number" label="编号" width="5%">
 					    </el-table-column>
 					    <el-table-column prop="name" label="门店名称" width="120">
 					    </el-table-column>
@@ -56,7 +56,7 @@
 					    </el-table-column>
 					    <el-table-column label="操作" width="100">
 					      <template scope="scope">
-					        <el-button @click="handleClick" type="text" size="small" ><i class="el-icon-edit"></i>编辑</el-button>
+					        <el-button @click="handleClick" type="text" size="small"><i class="el-icon-edit"></i>编辑</el-button>
 					      </template>
 					    </el-table-column>
 					  </el-table>
@@ -157,6 +157,13 @@
     border: 1px solid #dedede;
     color: #50bfff;
 }
+.el-button {
+	background: none;
+    border: 0px;
+}
+.ql-button {
+    padding: 10px 100px;
+}
 .ql-intro{
 	overflow: hidden;
 	margin-bottom: 30px
@@ -176,10 +183,7 @@
 	font-size: 10px;
 	border-radius: 5px;
 }
-.el-button {
-	background: none;
-    border: 0px;
-}
+
 .el-pagination__total {
     float: left;
 }
