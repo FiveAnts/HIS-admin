@@ -72,7 +72,7 @@
          </el-menu>
       </div>
       <div class="intro">
-         <p>当前位置：首页</p>
+         <p>当前位置: {{$route.name}}</p>
       </div>
       <div class="main-content">
          <router-view></router-view>

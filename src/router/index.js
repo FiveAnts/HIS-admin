@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/view/home'
 import Search from '@/view/search'
 import Booking from '@/view/yy-appointment'
+import yydDetails from '@/view/yy-details'
 import Inquiry from '@/view/inquiry'
 import Recipe from '@/view/recipe'
 import Charge from '@/view/charge'
@@ -28,7 +29,13 @@ export default new Router({
     },
     {
       path: '/booking',
+      name:' 预约',
       component: Booking
+    },
+    {
+        path:'/booking/details',
+        name:' 预约 / 预约详情',
+        component: yydDetails
     },
     {
       path: '/inquiry',

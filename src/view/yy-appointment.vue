@@ -1,6 +1,5 @@
 <template>
 	<div id="yy-appointment">
-	<br>
 		<el-tabs v-model="activeName" class="yy-tabs" @tab-click="handleClick">
 		  <el-tab-pane label="今日预约" name="first">
 		  	<!-- 全部科室 -->
@@ -51,14 +50,14 @@
 		  			    <template scope="scope">
 		  			    	<div class="cell cell-blue" v-if="scope.row.appoint==1||scope.row.tag==1">
 	  			    			<span class="el-tag" style="margin-right: 140px;color: white" v-if="scope.row.appoint==1">就诊中<!----></span>
-	  			    			<i class="el-icon-time" v-if="scope.row.appoint==1"></i>
-	  			    			<span v-if="scope.row.appoint==1" style="padding-right: 10px;">签到</span>
-				  				<i class="el-icon-time" v-if="scope.row.appoint==0" style="color:#ACACAC;"></i>
-		  						<span v-if="scope.row.appoint==0" style="color:#ACACAC;padding-right: 10px;">签到</span>
+	  			    			<i class="el-icon-time" v-if="scope.row.appoint==0"></i>
+	  			    			<span v-if="scope.row.appoint==0" style="padding-right: 10px;">签到</span>
+				  				<i class="el-icon-time" v-if="scope.row.appoint==1" style="color:#ACACAC;"></i>
+		  						<span v-if="scope.row.appoint==1" style="color:#ACACAC;padding-right: 10px;">签到</span>
 		  						<i class="el-icon-edit"></i>
 		  						<span style="padding-right: 10px;">测量</span>
 		  						<i class="el-icon-document"></i>
-		  						<span style="padding-right: 10px;"><router-link to="/yy-appointment/details">详情</router-link></span>
+		  						<span style="padding-right: 10px;"><router-link to="/booking/details">详情</router-link></span>
 		  						<i class="el-icon-close"></i>
 		  						<span>取消</span>
 		  			    	</div>
@@ -174,7 +173,7 @@
 				  </el-table>
 			</div>
 			<div class="allAppointPage">
-				 <div class="block">
+				 <div class="block" style="text-align: center;">
 				   <el-pagination
 				     @size-change="handleSizeChange"
 				     @current-change="handleCurrentChange"
@@ -198,13 +197,16 @@
 		list-style: none;
 		padding-left: 0px;
 	}
+	a{
+		text-decoration: none;
+	}
 	#yy-appointment{
 		background: #F6F6F6;
 	}
-	.yy-tabs{
+/*	.yy-tabs{
 		width: 80%;
 		margin: 2% auto;
-	}
+	}*/
 	.yy-tabs .el-tabs__header {
 	    border-radius: 7px;
 	    background: #FFFFFF;
@@ -241,6 +243,7 @@
 	.yy-section ul{
 		text-align: left;
 		padding-left: 5px;
+	    margin-top: 25px;
 	}
 	.yy-section ul li{
 		margin-bottom: 30px;
@@ -275,7 +278,7 @@
 	     border-right: none; 
 	}
 	.yy-doctor{
-		width: 80.5%;
+		width: 84%;
 		/*max-width: 628px;*/
 		margin-left: 15px;
 		padding-left:0;
