@@ -44,7 +44,7 @@
 				</el-col>
 				<el-col :xs="24" :sm="24" :md="24" :lg="24">
 					<el-table :data="tableData" border style="width: 100%">
-					    <el-table-column  prop="number" label="编号" width="5%">
+					    <el-table-column  prop="number" label="编号" width="75">
 					    </el-table-column>
 					    <el-table-column prop="name" label="门店名称" width="120">
 					    </el-table-column>
@@ -56,7 +56,7 @@
 					    </el-table-column>
 					    <el-table-column label="操作" width="100">
 					      <template scope="scope">
-					        <el-button @click="handleClick" type="text" size="small"><i class="el-icon-edit"></i>编辑</el-button>
+					        <el-button @click="" type="text" size="small" icon="edit">编辑</el-button>
 					      </template>
 					    </el-table-column>
 					  </el-table>
@@ -75,7 +75,58 @@
 				</el-pagination>
 			
 		  </el-tab-pane>
-		  <el-tab-pane label="科室信息">角色管理</el-tab-pane>
+		  <el-tab-pane label="科室信息">
+		  	<div class="office">
+		  		<el-col :xs="4" :sm="4" :md="4" :lg="4" class="ql-right" >
+		  			<div class="office-character" style="margin-bottom:20px" >
+		  				<el-table :data="officeChar" class="boxShadow"  style="width: 100%">
+		  				    <el-table-column prop="officechar" label="科室性质" width="185"font-size="24px">
+		  				    </el-table-column>
+		  				</el-table>
+		  			</div>
+		  			<div class="office-classes">
+		  				<el-table :data="officeClass" class="boxShadow"  style="width: 100%">
+		  				    <el-table-column prop="officeclass" label="科室类别" width="185"font-size="24px">
+		  				    </el-table-column>
+		  				</el-table>
+		  			</div>
+		  		</el-col>
+		  		<el-col :xs="19" :sm="19" :md="19" :lg="19" class="ql-left boxShadow" >
+		  			<el-card class="box-card">
+		  			  <div slot="header" class="clearfix">
+		  			    <span style="line-height: 36px;font-size:24px">全部科室</span>
+		  			    <el-button style="float:right" type="success">新增科室</el-button>
+		  			  </div>
+		  			  <div class="text item">
+		  			    	<el-collapse accordion>
+		  			    	  <el-collapse-item>
+		  			    	    <template slot="title">
+		  			    	      儿科<i class= "icon icon-add"></i>
+		  			    	    </template>
+		  			    	    
+		  			    	  </el-collapse-item>
+		  			    	  <el-collapse-item title="内科">
+		  			    	    
+		  			    	  </el-collapse-item>
+		  			    	  <el-collapse-item title="产科">
+		  			    	    
+		  			    	  </el-collapse-item>
+		  			    	  <el-collapse-item title="骨科">
+		  			    	    
+		  			    	  </el-collapse-item>
+		  			    	  <el-collapse-item title="治疗室">
+		  			    	    
+		  			    	  </el-collapse-item>
+		  			    	  <el-collapse-item title="药房">
+		  			    	    
+		  			    	  </el-collapse-item>
+		  			    	</el-collapse>
+		  			  </div>
+		  			</el-card>
+					
+		  		</el-col>
+		  	</div>
+		  </el-tab-pane>
 		  <el-tab-pane label="人员信息">定时任务补偿</el-tab-pane>
 		</el-tabs>
 	</div>
@@ -104,6 +155,28 @@
 					tel   :'020-84302585',
 					address:'广州市海珠区江南大道中3号'
 				}],
+				officeChar:[{
+					officechar:'可挂号科室（16）'
+				},{
+					officechar:'停用科室（0）'
+				},{
+					officechar:'其他科室（0）'
+				},{
+					officechar:''
+				},{
+					officechar:''
+				}],
+				officeClass:[{
+					officeclass:'医疗科室（16）'
+				},{
+					officeclass:'职能科室（2）'
+				},{
+					officeclass:'临床科室（1）'
+				},{
+					officechar:''
+				},{
+					officechar:''
+				}],
 				currentPage1: 5,
 				currentPage2: 5,
 				currentPage3: 5,
@@ -122,6 +195,9 @@
 </script>
 
 <style>
+.boxShadow{
+	box-shadow: 2px 2px 1px #dedede;
+}
 .el-tabs--border-card {
     border-radius: 5px;
 }
@@ -152,7 +228,7 @@
 	height: 100px;
     margin-bottom: 40px;
 }
-.el-button {
+/*.el-button {
     background: #fff;
     border: 1px solid #dedede;
     color: #50bfff;
@@ -160,8 +236,11 @@
 .el-button {
 	background: none;
     border: 0px;
-}
+}*/
 .ql-button {
+    color: #50bfff;
+	background: none;
+    border: 0px;
     padding: 10px 100px;
 }
 .ql-intro{
@@ -206,5 +285,31 @@
 }
 .el-pager li:last-child {
      border-right: 0px; 
+}
+/*ofiice*/
+.el-table th>.cell {
+    font-size: 20px;
+    font-weight: initial;
+}
+.ql-left{
+	margin-left: 20px;
+}
+.el-card__body {
+     padding: 0px; 
+}
+.icon-add{
+	background-image:url(../assets/image/30.png);
+	width: 26px;
+	height: 23px
+}
+.icon {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    margin-right: 5px;
+    display: inline-block;
+    background-position: 0 0;
 }
 </style>
