@@ -13,6 +13,7 @@ import Drug from '@/view/drug'
 import Model from '@/view/model'
 import Power from '@/view/power'
 import Scheduling from '@/view/scheduling'
+import Project from '@/view/project'
 
 
 Vue.use(Router)
@@ -21,10 +22,12 @@ export default new Router({
   routes: [
     {
       path: '/home',
+      name:'首页',
       component: Home
     },
     {
       path: '/search',
+      name:'查询',
       component: Search
     },
     {
@@ -39,39 +42,53 @@ export default new Router({
     },
     {
       path: '/inquiry',
+      name:'问诊',
       component: Inquiry
     },
     {
       path: '/recipe',
+      name:'处方',
       component: Recipe
     },
     {
       path: '/charge',
+      name:'收费',
       component: Charge
     },
     {
       path: '/patient',
+      name:'病人',
       component: Patient
     },
     {
       path: '/clinic',
+      name:'诊所',
       component: Clinic
     },
     {
       path: '/drug',
+      name:'药品',
       component: Drug
     },
     {
       path: '/model',
+      name:'模块',
       component: Model
     },
     {
       path: '/power',
+      name:'系统权限',
       component: Power
     },
     {
       path: '/scheduling',
+      name:'排班',
       component: Scheduling
+    },
+    {
+      path: '/project',
+      name:'项目',
+      component: Project
     } 
   ]
 })

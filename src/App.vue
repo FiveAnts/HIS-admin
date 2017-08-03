@@ -1,6 +1,91 @@
 <template>
   <div id="app">
-    <!-- <div class="nav-left" v-bind:class="{ showNav: navCollapse }"> -->
+<!--     <el-row>
+      <el-col :xs="4" :sm="4" :md="4" :lg="4">
+         <div class="nav-left">
+          <div class="logo">
+            <img src="./assets/image/logo.png">
+          </div>
+          <div class="main-nav" >
+            <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" theme="dark" style="margin-top:30px;">
+             <router-link to='/home'>
+                 <el-menu-item index="1" class='icon-active'><span class='icon-img icon-home'></span>首页</el-menu-item>
+             </router-link>
+             <router-link to='/search' >
+                 <el-menu-item index="2" class='icon-active'><span class='icon-img icon-search'></span>查询</el-menu-item>
+             </router-link>
+             <router-link to='/scheduling'>
+                 <el-menu-item index="4" class='icon-active'><span class='icon-img icon-scheduling'></span>排班</el-menu-item>
+             </router-link>
+             <router-link to='/booking'>
+                 <el-menu-item index="5" class='icon-active'><span class='icon-img icon-booking'></span>预约</el-menu-item>
+             </router-link>
+             <router-link to='/inquiry'>
+                 <el-menu-item index="6" class='icon-active'><span class='icon-img icon-inquiry'></span>问诊</el-menu-item>
+             </router-link>
+             <router-link to='/recipe'>
+                 <el-menu-item index="7" class='icon-active'><span class='icon-img icon-recipe'></span>处方</el-menu-item>
+             </router-link>
+             <router-link to='/charge'>
+                 <el-menu-item index="8" class='icon-active'><span class='icon-img icon-charge'></span>收费</el-menu-item>
+             </router-link>
+             <router-link to='patient'>
+                 <el-menu-item index="9" class='icon-active'><span class='icon-img icon-patient'></span>患者</el-menu-item>
+             </router-link>
+             <router-link to='/clinic'>
+                 <el-menu-item index="10" class='icon-active'><span class='icon-img icon-clinic'></span>诊所</el-menu-item>
+             </router-link>
+             <router-link to='drug'>
+                 <el-menu-item index="11" class='icon-active'><span class='icon-img icon-drug'></span>药品</el-menu-item>
+             </router-link>
+             <router-link to='/model'>
+                 <el-menu-item index="12" class='icon-active'><span class='icon-img icon-model'></span>模板</el-menu-item>
+             </router-link>
+             <router-link to='/power'>
+                 <el-menu-item index="13" class='icon-active'><span class='icon-img icon-power'></span>系统</el-menu-item>
+             </router-link>          
+           </el-menu>
+          </div>
+           
+         </div>
+
+      </el-col>
+      <el-col :xs="20" :sm="20" :md="20" :lg="20">
+         <div class="rightSide">
+           <div class="nav-top">
+
+              <el-menu :default-active="activeIndex2" class="el-menu-demo nav-top" mode="horizontal" @select="handleSelect">
+                <span class='btn-collapse' @click='collapse'><img src="./assets/image/bars.png"></span>
+                <span class="Showtime">今天 {{getMonth}}月{{getDay}}日&nbsp&nbsp{{getWeekDay}}&nbsp{{getHours}}:{{getMinutes}}</span> 
+                
+              
+                <el-menu-item index="1">
+                  <span class='icon-img icon-exit'></span>退出
+                </el-menu-item>
+                <el-menu-item index="3"><a href="#" >
+                  <span class='icon-img icon-help'></span>帮助</a>
+                </el-menu-item>
+                <el-menu-item index="3"><a href="#" >
+                 <span class='icon-img icon-message'></span>消息</a>
+                </el-menu-item>
+                <el-submenu index="2">
+                  <template slot="title">账号</template>
+                  <el-menu-item index="2-1">个人信息</el-menu-item>
+                  <el-menu-item index="2-2">修改密码</el-menu-item>
+                </el-submenu>
+              </el-menu>
+           </div>
+           <div class="intro">
+              <p>当前位置：首页</p>
+           </div>
+           <div class="main-content">
+              <router-view></router-view>
+           </div>
+
+
+         </div>
+      </el-col>
+    </el-row> -->
     <div class="nav-left">
      <div class="logo">
        <img src="./assets/image/logo.png">
@@ -28,20 +113,23 @@
         <router-link to='/charge'>
             <el-menu-item index="8" class='icon-active'><span class='icon-img icon-charge'></span>收费</el-menu-item>
         </router-link>
-        <router-link to='patient'>
+        <router-link to='/patient'>
             <el-menu-item index="9" class='icon-active'><span class='icon-img icon-patient'></span>患者</el-menu-item>
         </router-link>
         <router-link to='/clinic'>
             <el-menu-item index="10" class='icon-active'><span class='icon-img icon-clinic'></span>诊所</el-menu-item>
         </router-link>
-        <router-link to='drug'>
+        <router-link to='/drug'>
             <el-menu-item index="11" class='icon-active'><span class='icon-img icon-drug'></span>药品</el-menu-item>
         </router-link>
+        <router-link to='/project'>
+            <el-menu-item index="12" class='icon-active'><span class='icon-img icon-charge'></span>项目</el-menu-item>
+        </router-link>
         <router-link to='/model'>
-            <el-menu-item index="12" class='icon-active'><span class='icon-img icon-model'></span>模板</el-menu-item>
+            <el-menu-item index="13" class='icon-active'><span class='icon-img icon-model'></span>模板</el-menu-item>
         </router-link>
         <router-link to='/power'>
-            <el-menu-item index="13" class='icon-active'><span class='icon-img icon-power'></span>系统</el-menu-item>
+            <el-menu-item index="14" class='icon-active'><span class='icon-img icon-power'></span>系统</el-menu-item>
         </router-link>          
       </el-menu>
      </div>
@@ -86,7 +174,7 @@
 </template>
 
 <script>
-
+  
   var myDate=new Date();
   var date=myDate.getDate(); //星期几
   var weekDay=new Array('周一','周二','周三','周四','周五','周六','周日');
@@ -128,13 +216,13 @@
 }
 #app {
   margin:0;
+  overflow:hidden;
 }
 .nav-left{
 /*  width: 20%;*/
   height: 800px;
   padding: 0;
-  /*position: fixed;*/
-  float: left;
+  position: fixed;
   background-color: #324D56;
   border-right: 1px solid #000;
 }
@@ -146,7 +234,7 @@
   height: auto;
 }
 .logo{
-  width: 195px;
+  width: 194px;
   height: 100px;
   background-color: #fff;
 }
@@ -156,7 +244,8 @@
   width: 130px;
 }
 .rightSide{
-  width: 85.45%;
+  margin-left:195px;
+  width: 86%;
   height: auto;
   /*border: #000 1px solid;*/
   float: left;
@@ -185,8 +274,9 @@
 
 }
 .el-menu-item{
-  height: 50px;
+  height: 45px;
   font-size: 15px !important; 
+  line-height: 50px;
 }
 /*顶部导航图标*/
 a.router-link-active .icon-active{
@@ -270,31 +360,31 @@ a.router-link-active .icon-active{
   margin-right: 20px;
   width: 20px;
   height: 20px;
-  background-image: url(./assets/image/08.png);
+  background-image: url(./assets/image/09.png);
 }
 .icon-drug{
   margin-right: 20px;
   width: 20px;
   height: 20px;
-  background-image: url(./assets/image/09.png);
+  background-image: url(./assets/image/10.png);
 }
 .icon-model{
   margin-right: 20px;
   width: 20px;
   height: 20px;
-  background-image: url(./assets/image/10.png);
+  background-image: url(./assets/image/11.png);
 }
 .icon-power{
   margin-right: 20px;
   width: 20px;
   height: 20px;
-  background-image: url(./assets/image/11.png);
+  background-image: url(./assets/image/12.png);
 }
 .icon-patient{
   margin-right: 20px;
   width: 20px;
   height: 20px;
-  background-image: url(./assets/image/12.png);
+  background-image: url(./assets/image/08.png);
 }
 .btn-collapse{
   width: 58px;
@@ -330,6 +420,8 @@ a.router-link-active .icon-active{
   width: 97%;
   /*border:1px solid #333;*/
 }
-
+table{
+  padding:0;
+}
 </style>
 
