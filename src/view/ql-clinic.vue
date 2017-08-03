@@ -92,38 +92,42 @@
 		  			</div>
 		  		</el-col>
 		  		<el-col :xs="19" :sm="19" :md="19" :lg="19" class="ql-left boxShadow" >
-		  			<el-card class="box-card">
-		  			  <div slot="header" class="clearfix">
-		  			    <span style="line-height: 36px;font-size:24px">全部科室</span>
-		  			    <el-button style="float:right" type="success">新增科室</el-button>
-		  			  </div>
-		  			  <div class="text item">
-		  			    	<el-collapse accordion>
-		  			    	  <el-collapse-item>
-		  			    	    <template slot="title">
-		  			    	      儿科<i class= "icon icon-add"></i>
-		  			    	    </template>
-		  			    	    
-		  			    	  </el-collapse-item>
-		  			    	  <el-collapse-item title="内科">
-		  			    	    
-		  			    	  </el-collapse-item>
-		  			    	  <el-collapse-item title="产科">
-		  			    	    
-		  			    	  </el-collapse-item>
-		  			    	  <el-collapse-item title="骨科">
-		  			    	    
-		  			    	  </el-collapse-item>
-		  			    	  <el-collapse-item title="治疗室">
-		  			    	    
-		  			    	  </el-collapse-item>
-		  			    	  <el-collapse-item title="药房">
-		  			    	    
-		  			    	  </el-collapse-item>
-		  			    	</el-collapse>
-		  			  </div>
-		  			</el-card>
-					
+		  			<p style="height: 38px;">全部科室
+		  				<el-button style="float:right;" type="success">新增科室</el-button>
+		  			</p>
+		  			<el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+		  			    <el-submenu index="1">
+		  			        <template slot="title">儿科
+		  			        	<span class="icon icon-add"></span>
+		  			        	<span style="float:right;"><i class="icon icon-check"></i>查看</span>
+		  			        	<span style="float:right;"><i class="icon icon-add2"></i>添加子科室</span>
+		  			        </template>
+		  			        <el-menu-item-group class="bg-fff">
+		  			          <el-menu-item index="1-1">全部科室<i class="icon icon-add2"></i></el-menu-item>
+		  			          <el-menu-item index="1-2">小儿儿科<i class="icon icon-add2"></i></el-menu-item>
+		  			        </el-menu-item-group>    
+		  			    </el-submenu>
+		  			    <el-submenu index="2">
+		  			        <template slot="title">内科<span class="icon icon-add"></span></template>
+		  			        <el-menu-item-group class="bg-fff">
+		  			          <el-menu-item index="2-1">内科一科</el-menu-item>
+		  			          <el-menu-item index="2-2">内科二科</el-menu-item>
+		  			        </el-menu-item-group>    
+		  			    </el-submenu>
+		  			    <el-menu-item index="3">产科<span class="icon icon-add"></span></el-menu-item>
+		  			    <el-menu-item index="4">骨科<span class="icon icon-add"></span></el-menu-item>
+		  			    <el-submenu index="5">
+		  			        <template slot="title">治疗室</template>
+		  			        <el-menu-item-group class="bg-fff">
+		  			          <el-menu-item index="5-1">治疗室一</el-menu-item>
+		  			          <el-menu-item index="5-2">治疗室二</el-menu-item>
+		  			        </el-menu-item-group>    
+		  			    </el-submenu>
+		  			    <el-menu-item index="6">药房</el-menu-item>
+		  			</el-menu>
+		  			  
+		  			  
+		  		
 		  		</el-col>
 		  	</div>
 		  </el-tab-pane>
