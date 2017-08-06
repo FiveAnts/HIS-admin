@@ -1,9 +1,6 @@
 <template>
 	<div>
 		<div class="projectApp">
-			<el-breadcrumb separator="/">
-			  	<el-breadcrumb-item >当前位置：项目</el-breadcrumb-item>
-			</el-breadcrumb>
 			<div class="projectContainer">
 				<el-menu :default-active="activeIndex" class="el-menu-demo nav-menu" mode="horizontal">
 					<el-menu-item index="1" @click="markactiveIndex='1'" style="float:left;">
@@ -44,7 +41,6 @@
 	.projectApp{
 		padding-left: 20px;
 		padding-right: 20px;
-		background-color: #F6F6F6;
 		min-height: 300px;
 	}
 	.projectApp .el-breadcrumb__item:last-child .el-breadcrumb__separator {

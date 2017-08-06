@@ -171,7 +171,6 @@
 		padding-left: 20px;
 		padding-right: 20px;
 		padding-bottom: 50px;
-		background-color: #F6F6F6;
 		min-height: 300px;
 	}
 	.addItemApp .el-breadcrumb__item:last-child .el-breadcrumb__separator,.addItemApp .el-breadcrumb__item:first-child .el-breadcrumb__separator {

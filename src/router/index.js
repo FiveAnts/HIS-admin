@@ -14,6 +14,7 @@ import Model from '@/view/model'
 import Power from '@/view/power'
 import Scheduling from '@/view/scheduling'
 import Project from '@/view/project'
+import PersonalInfo from '@/view/personalInfo'
 /*2017/8/5*/
 import Register from '@/view/register'
 
@@ -30,6 +31,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name:'个人信息',
+      component: PersonalInfo
+    },
+    {
+      path: '/home',
       name:'首页',
       component: Home
     },

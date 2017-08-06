@@ -1,86 +1,6 @@
 <template>
-	<div>
+	<div id='jm-home'>
 	    <div>
-	    	<!-- <div class="today-booking">
-	    		<div class='booking-title'>
-	    		   <span style="font-weight:bold;">今日预约</span>
-	    		   <a class="more">更多</a>
-	    		</div>
-	    		<table>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			   <td>预约:王医生</td>
-	    			   <td><a href='#'>查看</a></td>
-	    			</tr>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			   <td>预约:王医生</td>
-	    			   <td><a href='#'>查看</a></td>
-	    			</tr>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			   <td>预约:王医生</td>
-	    			   <td><a href='#'>查看</a></td>
-	    			</tr>
-
-	    		</table>
-	    	</div>
-	    	<div class="today-scheduling gap">
-	    		<div class='booking-title'>
-	    		   <span style="font-weight:bold;">今日排班</span>
-	    		   <a class="more">更多</a>
-	    		</div>
-	    		<table>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			</tr>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			</tr>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			</tr>
-
-	    		</table>
-	    	</div>
-	    	<div class="today-booking gap-y">
-	    		<div class='booking-title'>
-	    		   <span style="font-weight:bold;">月度统计(过去三十天)</span>
-	    		   <a class="more">更多</a>
-	    		</div>
-	    		<div id='echarts'></div>
-	    		<div id='echarts2'></div>
-
-	    		
-	    	</div>
-	    	<div class="today-scheduling gap gap-y">
-	    		<div class='booking-title'>
-	    		   <span style="font-weight:bold;">今日排班</span>
-	    		   <a class="more">更多</a>
-	    		</div>
-	    		<table>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			</tr>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			</tr>
-	    			<tr>
-	    			   <td>08:00~09:00</td>
-	    			   <td>李女士,13512345678</td>
-	    			</tr>
-
-	    		</table>
-	    	</div> -->
-             
 	    	<el-row :gutter="30">
 	    	  <el-col :xs="24" :sm="24" :md="15" :lg="15">
 	    	  	 <div class="today-booking">
@@ -88,7 +8,7 @@
 		    		   <span style="font-weight:bold;">今日预约</span>
 		    		   <a class="more">更多</a>
 		    		</div>
-		    		<table>
+		    		<table class="table">
 		    			<tr v-for='book in filteredBook'>
 		    			   <td>{{book.time}}</td>
 		    			   <td>{{book.peple}}</td>
@@ -106,7 +26,7 @@
 		    		   <span style="font-weight:bold;">今日排班</span>
 		    		   <a class="more">更多</a>
 		    		</div>
-		    		<table>
+		    		<table class="table">
 		    			<tr v-for="scheduling in filteredScheduling">
 		    			   <td>{{scheduling.time}}</td>
 		    			   <td>{{scheduling.doctor}}</td>
@@ -136,7 +56,7 @@
 	    	  	 	   <span style="font-weight:bold;">最新动态</span>
 	    	  	 	   <a class="more">更多</a>
 	    	  	 	</div>
-	    	  	 	<table>
+	    	  	 	<table class="table">
 	    	  	 		<tr v-for='news in filteredNews'>
 		    			   <td>{{news.time}}</td>
 		    			   <td>{{news.event}}</td>
@@ -278,10 +198,10 @@ import Vue from 'vue'
 	}
 </script>
 <style>
-#count{
+#jm-home #count{
 	height: auto !important;
 }
-#echarts,#echarts2{
+#jm-home #echarts,#echarts2{
 	padding: 8px 16px;
 	height: 350px;
 	width: 260px;
@@ -289,31 +209,31 @@ import Vue from 'vue'
 	margin-right: 35px;
 	/*border: 1px solid #333;*/
 }
-#echarts canvas,#echart2 canvas{
+#jm-home #echarts canvas,#echart2 canvas{
 	height: 350px !important;
 	width: 300px !important;
 }
-.gap{
+#jm-home .gap{
 	/*margin-left: 18px;*/
 }
-.gap-y{
+#jm-home .gap-y{
 	margin-top: 20px;
 }
- .today-booking{
+ #jm-home .today-booking{
  	width: 100%;
  	height: 400px;
  	background-color: #fff;
  	box-shadow: 2px 1px 1px 1px #eaeaea;
  	float: left;
  }
- .today-scheduling{
+#jm-home .today-scheduling{
  	width: 100%;
  	height: 400px;
  	background-color: #fff;
  	box-shadow: 2px 1px 1px 1px #eaeaea;
  	float: left;
  }
- .booking-title{
+ #jm-home .booking-title{
  	font-size: 16px;
  	/*font-weight: bold;*/
  	padding: 8px 16px;
@@ -322,24 +242,23 @@ import Vue from 'vue'
  	background-color: #FBFBFB;
 /* 	font-family: '微软雅黑';*/
  }
- .more{
+ #jm-home .more{
     color: #77d0a4;
     text-decoration: none;
     float: right;
     font-size: 14px;
  }
- table{
+#jm-home table{
  	padding:18px 16px;
  }
- tr{
-
+ #jm-home table tr{
  	height: 40px;
  }
- td{
+ #jm-home .table td{
    width: 280px;
    /*border:1px solid #000;*/
  }
-table a{
+#jm-home table a{
    color: #77d0a4;
    text-decoration: none;
  }
