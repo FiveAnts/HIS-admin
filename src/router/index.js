@@ -14,14 +14,22 @@ import Model from '@/view/model'
 import Power from '@/view/power'
 import Scheduling from '@/view/scheduling'
 import Project from '@/view/project'
+/*2017/8/5*/
+import Register from '@/view/register'
 
+/*2017/8/3-----lxy*/
+import Item from '@/view/Project/Item'
+import Meal from '@/view/Project/Meal'
+import regFee from '@/view/Project/regFee'
+import addItem from '@/view/Project/addItem'
+import addMeal from '@/view/Project/addMeal'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/home',
+      path: '/',
       name:'首页',
       component: Home
     },
@@ -85,10 +93,19 @@ export default new Router({
       name:'排班',
       component: Scheduling
     },
+    
+   /*2017/8/3-----lxy*/
     {
-      path: '/project',
-      name:'项目',
-      component: Project
-    } 
+      path: '/project', 
+      component: Project ,
+      children: [
+        { path: '/project/item', component: Item, name:'项目' }, 
+        { path: '/project/meal', component: Meal, name:'套餐'},
+        { path: '/project/regFee', component: regFee, name:'挂号费'}, 
+      ]
+    },
+    { path: '/project/addItem', component: addItem, name:'新增项目'}, 
+    { path: '/project/addMeal', component: addMeal, name:'新增套餐'}, 
+    { path: '/register', component: Register, name:'注册'}, 
   ]
 })

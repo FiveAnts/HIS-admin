@@ -260,12 +260,13 @@
 .el-menu{
   background-color: #fff;
 }
-.el-menu--horizontal .el-menu-item{
+/*lxy 2017/8/6*/
+ #app .el-menu--horizontal .el-menu-item{
   float: right;
 }
-.el-menu--horizontal .el-submenu{
+ #app .el-menu--horizontal .el-submenu{
   float: right;
-}
+} 
 /*.icon-img{
   margin-right: 10px;
 }*/
