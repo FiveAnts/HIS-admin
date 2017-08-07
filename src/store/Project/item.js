@@ -1,7 +1,8 @@
 import Vue from 'vue'   //因为vue导入的不是全局的
-export default {
+const Project ={
 	 // 存储状态值
 	state: {
+		projectTab:'1',
 		infoItems:[],
 		selectItems:[],
 		classify:[],
@@ -22,25 +23,9 @@ export default {
 				alert("请求失败了")
 			})
 		},
-		/*getSelectData(state){
-
-			let k= state;
-			console.log("cccccc"+k.formInline.classify);
-			//采用this.$http才不用导入vue
-			Vue.http.get('../../../static/dataJson/Project/item.json').then(function(response){
-				if(k.formInline.classify!==""){
-					for(let i=0,j=0;i<response.data.infoItems.length;i++){
-						if(response.data.infoItems[i].classify===k.formInline.classify){
-							j++;
-							k.selectItems[j]=response.data.infoItems[i];
-						}
-					}
-					k.infoItems=k.selectItems;
-					console.log(k.infoItems);
-				}
-			}, function(response){
-				alert("请求失败了")
-			})
-		}*/
+		updateProjectTab (state, message) {
+		    state.projectTab = message;
+		},
 	},
 }
+export default Project;

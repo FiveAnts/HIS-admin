@@ -226,10 +226,9 @@
 	.mealContainer .btn-add:hover,.mealContainer .btn-add a:hover{
 		color: white;
 		border: none;
-		width: 50px；
 	}
 	.mealContainer .btn-add a{
-		color: white;
+		color: white !important;
 		text-decoration: none;
 	}
 	.mealContainer .search-nav div:last-child{

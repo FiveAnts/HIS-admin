@@ -234,10 +234,9 @@
 	.itemContainer .btn-add:hover,.itemContainer .btn-add a:hover{
 		color: white;
 		border: none;
-		width: 50px；
 	}
 	.itemContainer .btn-add a{
-		color: white;
+		color: white !important;
 		text-decoration: none;
 	}
 	.itemContainer .search-nav div:last-child{

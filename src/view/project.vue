@@ -3,15 +3,15 @@
 		<div class="projectApp">
 			<div class="projectContainer">
 				<el-menu :default-active="activeIndex" class="el-menu-demo nav-menu" mode="horizontal">
-					<el-menu-item index="1" @click="markactiveIndex='1'" style="float:left;">
-						<router-link to="/project/item">项目</router-link>
-					</el-menu-item>
-					<el-menu-item index="2" @click="markactiveIndex='2'" style="float:left;">
-						<router-link to="/project/meal">套餐</router-link>
-					</el-menu-item>
-					<el-menu-item index="3" @click="markactiveIndex='3'" style="float:left;">
-						<router-link to="/project/regFee">挂号费</router-link>
-					</a></el-menu-item>
+					<router-link to="/project/item"  @click="markactiveIndex='1'" style="float:left;">
+						<el-menu-item index="1"><span>项目</span></el-menu-item>
+					</router-link>
+					<router-link to="/project/meal"  @click="markactiveIndex='2'" style="float:left;">
+						<el-menu-item index="2"><span>套餐</span></el-menu-item>
+					</router-link>
+					<router-link to="/project/regFee"  @click="markactiveIndex='3'" style="float:left;">
+						<el-menu-item index="3"><span>挂号费</span></el-menu-item>
+					</router-link>
 				</el-menu>
 				<router-view>
 
@@ -22,17 +22,19 @@
 	</div>
 </template>
 <script>
+	import store from '../store/Project/item.js'
 	export default {
 		data() {
 	    	return {
-	        	markactiveIndex:'1',
+	        	
 	      	};
     	},
     	computed:{
-    		activeIndex: function () {
-    			return this.markactiveIndex;
-    		},
-      
+    		activeIndex: {
+    			get () {
+    				return store.state.projectTab;
+    			},
+    		}
         },
 	}
 	</script>
@@ -68,23 +70,26 @@
 	}
     .projectContainer .nav-menu a{
     	text-decoration: none;
-    	display: block;
-    	width: 100%;
+    	display: inline-block;
     	height: 100%;
-    	color: #C3C3C3;
+    	
+    }
+    .projectContainer .nav-menu span{
+		color: #C3C3C3;
     }
     .projectContainer .nav-menu .is-active{
     	background-color: #21d081;
     }
-     .projectContainer .nav-menu .is-active a{
+     .projectContainer .nav-menu .is-active span{
     	color: white !important;
     }
+   
     .projectContainer .nav-menu .el-menu-item,.nav-menu .is-active{
     	border-bottom:0px !important;
     	padding: 0px 30px;
     }
-     .projectContainer .nav-menu li:first-child{
-		border-radius: 5px 0px 0px 5px ;
+     .projectContainer .nav-menu a:first-child  li:first-child {
+		border-radius: 5px 0px 0px 5px;
     } 
     .projectApp .el-menu--horizontal .el-menu-item{
     	line-height: 50px;

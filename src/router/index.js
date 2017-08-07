@@ -17,6 +17,7 @@ import Project from '@/view/project'
 import PersonalInfo from '@/view/personalInfo'
 /*2017/8/5*/
 import Register from '@/view/register'
+import Login from '@/view/login'
 
 /*2017/8/3-----lxy*/
 import Item from '@/view/Project/Item'
@@ -112,6 +113,7 @@ export default new Router({
     },
     { path: '/project/addItem', component: addItem, name:'新增项目'}, 
     { path: '/project/addMeal', component: addMeal, name:'新增套餐'}, 
-    { path: '/register', component: Register, name:'注册'}, 
+    { path: '/register', component: Register, name:'注册'},
+    { path: '/login', component: Login, name:'登录'},
   ]
 })

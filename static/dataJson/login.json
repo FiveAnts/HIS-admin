@@ -1,0 +1,30 @@
+{
+	"data": 
+	[
+		{
+			"orgCode": "01",
+			"userName": "lxy",
+			"psd": "123456"
+		},
+		{
+			"orgCode": "01",
+			"userName": "pjm",
+			"psd": "123456"
+		},
+		{
+			"orgCode": "01",
+			"userName": "styy",
+			"psd": "123456"
+		},
+		{
+			"orgCode": "01",
+			"userName": "oql",
+			"psd": "123456"
+		},
+		{
+			"orgCode": "01",
+			"userName": "ljx",
+			"psd": "123456"
+		}
+	]
+}
