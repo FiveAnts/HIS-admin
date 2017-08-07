@@ -9,6 +9,7 @@ import Recipe from '@/view/recipe'
 import Charge from '@/view/charge'
 import Patient from '@/view/patient'
 import Clinic from '@/view/ql-clinic'
+import Count from '@/view/ql-count'
 import Drug from '@/view/drug'
 import Model from '@/view/model'
 import Power from '@/view/power'
@@ -79,6 +80,11 @@ export default new Router({
       path: '/clinic',
       name:'诊所',
       component: Clinic
+    },
+    {
+      path: '/count',
+      name:'诊所',
+      component: Count
     },
     {
       path: '/drug',

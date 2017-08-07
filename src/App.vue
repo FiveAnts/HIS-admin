@@ -34,6 +34,9 @@
         <router-link to='/clinic'>
             <el-menu-item index="10" class='icon-active'><span class='icon-img icon-clinic'></span>诊所</el-menu-item>
         </router-link>
+        <router-link to='/count'>
+            <el-menu-item index="10" class='icon-active'><span class='icon-img icon-clinic'></span>统计</el-menu-item>
+        </router-link>
         <router-link to='/drug'>
             <el-menu-item index="11" class='icon-active'><span class='icon-img icon-drug'></span>药品</el-menu-item>
         </router-link>
