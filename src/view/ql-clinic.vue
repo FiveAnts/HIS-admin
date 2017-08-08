@@ -644,7 +644,7 @@
 
 		      	Vue.http.get('../../../static/json/ql-clinicData.json').then(function(response){
 
-		      		me.list = response.data.data.data;
+		      		me.list = response.data.data.personalInfo;
 
 		      	}, function(response){
 		      		alert("JSON文件请求失败了")
