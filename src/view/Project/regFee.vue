@@ -35,7 +35,7 @@
 	    			{{item.name}}
 	    		</el-col>
 	    		<el-col  :span="5">
-	    			{{item.unit}}
+	    			{{item.unitPrice}}
 	    		</el-col>
 	    		<el-col  :span="4">
 	    			<span v-show="!item.state" class="forbidden-span" @click="item.state=!item.state">禁用</span>
@@ -43,7 +43,7 @@
 	    		</el-col>
 	    		<el-col  :span="4">
 	    			<el-col  :span="12">
-	    				<a @click="handleEdit(scope.$index, scope.row)">
+	    				<a  @click="getRowInfo(index,item)">
 	    					<img src="../../assets/img/Project/48.png">	
    						编辑</a>
         			</el-col>
@@ -56,6 +56,25 @@
 	    		</el-col>
 	    	</el-row>
 		</div>
+		 <!-- 新增弹窗 -->
+    	<el-dialog title="修改挂号费" :visible.sync="editDialogSeen " class="editDialog">
+          	<el-form class="small-space"  label-position="left" label-width="100px" style='width: 400px; margin-left:50px;'>
+	            <el-form-item label="挂号类型:">
+	             	<el-input v-model="editItem.classify"></el-input>
+	            </el-form-item>
+	            <el-form-item label="关联的项目：">
+	             	<el-input v-model="editItem.name"></el-input>
+	            </el-form-item>
+	            <el-form-item label="合计的价格（元）：">
+	             	<el-input v-model="editItem.unitPrice"></el-input>
+	            </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+            	<el-button @click="editDialogSeen = false;" class="canel-btn">取 消</el-button>
+            	<el-button type="primary" @click="editRegfee(editIndex)" class="submit-btn">提 交</el-button>
+            </div>
+    	</el-dialog>
+
 		 <!-- 新增弹窗 -->
     	<el-dialog title="修改挂号费" :visible.sync="changeDialogSeen " class="changeDialog">
           	<el-form class="small-space"  label-position="left" label-width="100px" style='width: 400px; margin-left:50px;'>
@@ -145,6 +164,7 @@
 		data: function () {
 	    	return {
 	    		changeDialogSeen: false,
+	    		editDialogSeen: false,
 	    		addDialogSeen: false,
 	    		markselect:'',
 	    		inputVal:'',
@@ -152,6 +172,17 @@
 	    			name:'',
 	    			listInfo: [],
 	    		},
+	    		editItem:{
+	        		"classify": "",
+		        	"name": "",
+		        	"unit": " ",
+		        	"unitPrice": 0,
+		        	"office": "",
+		        	"location": "",
+		        	"relateItem":"",
+		        	"state": true
+        	    }, 
+        	    editIndex:'',
 	    		typeList: [
 	    			{
 	    				name:"普通",
@@ -175,6 +206,21 @@
 		    }
 	    },
 	    methods: {
+		    getRowInfo:function(index,item) {
+		        this.editDialogSeen=true;
+		        this.editItem=JSON.parse(JSON.stringify(item));
+		        this.editIndex=index;
+		    },
+		    editRegfee:function(index) {
+		        this.infoItems[index]=this.editItem;
+		         this.$notify.success({
+		          	title: '成功',
+		          	message: '修改成功',
+		         	offset: 100,
+		        });
+		         console.log(this.infoItems[index]);
+		        this.editDialogSeen=false;
+		    },
 		    handleEdit(typel,index) {
 		        this.markselect=index;
 		        this.changeDialogSeen=true;
@@ -334,25 +380,25 @@
 
 
 	/*add*/
-	.regFeeContainer .changeDialog .dialog-footer,.regFeeContainer .addDialog .dialog-footer{
+	.regFeeContainer .changeDialog .dialog-footer,.regFeeContainer .addDialog .dialog-footer,.regFeeContainer .editDialog .dialog-footer{
 		text-align: center;
 		margin-bottom: 10px;
 	}
-	.regFeeContainer .changeDialog .dialog-footer button,.regFeeContainer .addDialog .dialog-footer button,.regFeeContainer .addDialog .save-btn{
+	.regFeeContainer .changeDialog .dialog-footer button,.regFeeContainer .addDialog .dialog-footer button,.regFeeContainer .editDialog .dialog-footer button{
 		width: 100px;
 		box-shadow: 0px -1px 0px 0px #FFFFFF,
 					 -1px 0px 0px 0px #FFFFFF, 
 					 1px 0px 0px 0px #FFFFFF, 
 					 0px 2px 1px #C8C8C8;
 	}
-	.regFeeContainer .changeDialog .canel-btn,.regFeeContainer .addDialog .canel-btn{
+	.regFeeContainer .changeDialog .canel-btn,.regFeeContainer .addDialog .canel-btn,.regFeeContainer .editDialog .canel-btn{
 		background-color: white;
 		color:#C3C3C3;
 	}
-	.regFeeContainer .changeDialog .canel-btn:hover,.regFeeContainer .addDialog .canel-btn:hover{
+	.regFeeContainer .changeDialog .canel-btn:hover,.regFeeContainer .addDialog .canel-btn:hover,.regFeeContainer .editDialog .canel-btn:hover{
 		border-color: #C3C3C3;
 	}
-	.regFeeContainer .changeDialog .print-btn,.regFeeContainer .addDialog .print-btn,.regFeeContainer .addDialog .save-btn{
+	.regFeeContainer .changeDialog .print-btn,.regFeeContainer .editDialog .submit-btn,.regFeeContainer .addDialog .save-btn,.regFeeContainer .addDialog .print-btn{
 		background-color: #1FD27D;
 		border-color: #1FD27D;
 	}
@@ -418,13 +464,17 @@
     	padding-top: 0px;
 
 	}
-	.regFeeContainer .addDialog .table-footer{
+	.regFeeContainer .addDialog .table-footer,.regFeeContainer .changeDialog .table-footer{
 		margin-bottom: 10px;
 		text-align: center;
 	}
 	.regFeeContainer .selectDiv{
 		background-color: #DEEDFA;
 		color:#5FA7E4;
+	}
+	.regFeeContainer .el-dialog--small{
+		width: 40%;
+		min-width: 445px;
 	}
 
 </style>

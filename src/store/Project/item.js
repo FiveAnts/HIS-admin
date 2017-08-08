@@ -1,5 +1,7 @@
 import Vue from 'vue'   //因为vue导入的不是全局的
-const Project ={
+import Vuex from 'vuex'
+Vue.use(Vuex);
+const Project =new Vuex.Store({
 	 // 存储状态值
 	state: {
 		projectTab:'1',
@@ -27,5 +29,5 @@ const Project ={
 		    state.projectTab = message;
 		},
 	},
-}
-export default Project;
+});
+export default Project

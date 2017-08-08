@@ -78,7 +78,7 @@
 	    		</el-col>
 	    		<el-col  :span="5">
 	    			<el-col  :span="12">
-	    				<a @click="handleEdit(scope.$index, scope.row)">
+	    				<a  @click="getRowInfo(index,item)">
 	    					<img src="../../assets/img/Project/48.png">	
    						编辑</a>
         			</el-col>
@@ -90,6 +90,27 @@
         			</el-col>
 	    		</el-col>
 	    	</el-row>
+	    	 <!-- 新增弹窗 -->
+	    	<el-dialog title="修改套餐" :visible.sync="editDialogSeen " class="editDialog">
+	          	<el-form class="small-space"  label-position="left" label-width="100px" style='width: 400px; margin-left:50px;'>
+		            <el-form-item label="套餐分类：">
+		             	<el-input v-model="editItem.classify"></el-input>
+		            </el-form-item>
+		            <el-form-item label="套餐名称：">
+		             	<el-input v-model="editItem.name"></el-input>
+		            </el-form-item>
+		            <el-form-item label="关联项目：">
+		             	<el-input v-model="editItem.relateItem"></el-input>
+		            </el-form-item>
+		            <el-form-item label="执行地点：">
+		             	<el-input v-model="editItem.location"></el-input>
+		            </el-form-item>
+	            </el-form>
+	            <div slot="footer" class="dialog-footer">
+	            	<el-button @click="editDialogSeen = false;" class="canel-btn">取 消</el-button>
+	            	<el-button type="primary" @click="handleEdit(editIndex)" class="submit-btn">提 交</el-button>
+	            </div>
+	    	</el-dialog>
 				
 		</div>
 		<el-pagination small layout="prev, pager, next,sizes,jumper" :total="100" class="page-nav" :page-sizes="[10, 20, 30, 40]" >
@@ -101,6 +122,18 @@
 	export default {
 		data: function () {
 	    	return {
+	    		editItem:{
+	        		"classify": "",
+		        	"name": "",
+		        	"unit": " ",
+		        	"unitPrice": 0,
+		        	"office": "",
+		        	"location": "",
+		        	"relateItem":"",
+		        	"state": true
+        	    }, 
+        	    editIndex:'',
+	    		editDialogSeen: false,
 	    		 
 		    }
 	    },
@@ -116,8 +149,20 @@
 			}
         },
 	    methods: {
-		    handleEdit() {
-		        console.log(index, row);
+		    getRowInfo:function(index,item) {
+		        this.editDialogSeen=true;
+		        this.editItem=JSON.parse(JSON.stringify(item));
+		        this.editIndex=index;
+		    },
+		    handleEdit:function(index) {
+		        this.infoItems[index]=this.editItem;
+		        this.$notify.success({
+		          	title: '成功',
+		          	message: '修改成功',
+		         	offset: 100,
+		        });
+		         console.log(this.infoItems[index]);
+		        this.editDialogSeen=false;
 		    },
 		    getData:function(){
 				this.$store.commit('getData')
@@ -238,10 +283,34 @@
 		background-color: #F8F9E7;
 	}
 
+	.mealContainer .editDialog .dialog-footer button{
+		width: 100px;
+		box-shadow: 0px -1px 0px 0px #FFFFFF,
+					 -1px 0px 0px 0px #FFFFFF, 
+					 1px 0px 0px 0px #FFFFFF, 
+					 0px 2px 1px #C8C8C8;
+	}
+	.mealContainer .editDialog .canel-btn{
+		background-color: white;
+		color:#C3C3C3;
+	}
+	.mealContainer .editDialog .canel-btn:hover{
+		border-color: #C3C3C3;
+	}
+	.mealContainer .editDialog .el-dialog__footer {
+		margin-bottom: 10px;
+		text-align: center;
+	}
+	.mealContainer .editDialog .submit-btn{
+		background-color: #1FD27D;
+		border-color: #1FD27D;
+	}
+	.mealContainer .el-dialog{
+		text-align: left;
+	}
+	.mealContainer .el-dialog--small{
+		width: 40%;
+		min-width: 445px;
+	}
 
-
-
-
-
-	
 </style>

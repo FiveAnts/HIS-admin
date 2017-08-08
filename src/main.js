@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import Vuex from 'vuex'
-import router from './router'
+import router from './router/index.js'
 import vueResource from 'vue-resource'
-import stores from '@/store/Project/item.js'
+import store from '@/store/Project/item.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 /*lxy 2017/8/5*/
@@ -17,7 +17,7 @@ Vue.use(ElementUI)
 Vue.use(vueResource)
 Vue.use(Vuex)
 
-const store = new Vuex.Store(stores);
+/*const store = new Vuex.Store(stores);*/
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
