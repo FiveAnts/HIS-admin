@@ -16,7 +16,7 @@
                 :headers="headers"
                 img-format="png"></my-upload>
               <img :src="imgDataUrl">
-            <p class="name">{{personalInfo.name}}</p>
+            <p class="name">{{username}}</p>
             
          </div>
        </el-col>
@@ -33,7 +33,7 @@
             </div>
             <table id='personal'>
               <tr>
-                <td>姓名：{{personalInfo.name}} <span class="tag-career">{{personalInfo.type}}</span></td>
+                <td>姓名：{{username}} <span class="tag-career">{{personalInfo.type}}</span></td>
                 <td>性别：{{personalInfo.sex}}</td>
               </tr>
               <tr>
@@ -104,13 +104,9 @@
     <!-- 个人信息弹窗 -->
     <el-dialog title="编辑个人信息" :visible.sync="dialogFormVisible">
           <el-form class="small-space" :model="personalInfo" label-position="left" label-width="70px" style='width: 400px; margin-left:50px;'>
-         
-           
-
             <el-form-item label="用户类型">
               <span>{{personalInfo.type}}</span>
             </el-form-item>
-
             <el-form-item label="所属科室">
               <el-select v-model="personalInfo.department" placeholder="请选择活动区域">
               <el-option label="内科" value="内科" ></el-option>
@@ -122,7 +118,7 @@
             </el-form-item>
 
             <el-form-item label="姓名">
-              <el-input v-model="personalInfo.name"></el-input>
+              <el-input v-model="username"></el-input>
             </el-form-item>
 
             <el-form-item label="性别">
@@ -223,6 +219,7 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
           dialogFormVisible2:false,
           dialogFormVisible3:false,
           show: false,
+          username:"",
           params: {
             token: '123456798',
             name: 'avatar'
@@ -261,14 +258,17 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
       }
     },
     methods:{
+      //lxy
+      getLoginData(){
+        let current = JSON.parse(window.sessionStorage.getItem("Info"));
+        this.username=current.userName;
+      },
       getData:function(){
         let data=this;
         Vue.http.get('../../static/json/jm-personalInto.json').then(function(respone){
-             // console.log('啦啦啦',data.personalInfo.birthday);
              data.personalInfo=respone.data.personalInfo;
              data.accountInfo=respone.data.accountInfo;
              data.doctorInfo=respone.data.doctorInfo;
-             
          })
       },
       ChangeBirthday(){
@@ -374,6 +374,7 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
       
       this.getData();
       this.ChangeEmail();
+      this.getLoginData();
       // this.ChangeBirthday();
       
     },
