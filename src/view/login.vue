@@ -15,9 +15,9 @@
         <el-input type="password" v-model="formInofo.psd"  class="login-input" placeholder="请输入密码"></el-input>
       </span>
       <el-button class="login-btn" @click="msgalert()">登录</el-button>
+      <div class="regDiv"><router-link to="/register">还没账号？点我去注册</router-link></div>
     </el-form>
     <p class="login-p">Copyright © 2017-2017 两个个登录账号信息：(1,1,1)、(0,zero,0)</p>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -152,11 +152,19 @@ export default {
         border: 0px;
       }
       
-      .login-p {
+      .login .login-p {
         text-align: center;
         margin-top: -105px;
         color: #999;
         font-size: 12px;
+      }
+      .login .regDiv{
+        text-align: center;
+        margin-top:30px;
+      }
+      .login .regDiv a{
+        color:#18A0F4;
+        font-size:14px;
       }
 
 </style>
