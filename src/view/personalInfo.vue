@@ -20,7 +20,7 @@
             
          </div>
        </el-col>
-       <el-col :xs="20" :sm="20" :md="20" :lg="20" ><!-- v-if='ChangePart' -->
+       <el-col :xs="20" :sm="20" :md="20" :lg="20" >
           <div class="Personal">
             <div style="margin-bottom:10px">
               <span class="title">个人信息</span>
@@ -95,37 +95,8 @@
               <td>{{doctorInfo.intro}}</td>
             </tr>
           </table>
-        </div>
-
-          
+        </div>          
        </el-col>
-      <!--  <el-col :xs="20" :sm="20" :md="20" :lg="20" v-else>
-          <div class="photoPart">
-              <el-row :gutter="20">
-                <el-col :xs="15" :sm="15" :md="15" :lg="15">
-                 
-                   <button class="keep-btn" @click='toggleShow'>点击</button>
-                   <my-upload field="img"
-                    :width="300"
-                    :height="300"
-                    url="/upload"
-                    :params="params"
-                    :headers="headers"
-                        lang-type="zh"
-                    :value.sync="show"
-                    img-format="png">
-                  </my-upload>
-                  <img :src="imgDataUrl">
-                  
-                </el-col>
-                <el-col :xs="9" :sm="9" :md="9" :lg="9">
-                    <button class="cancle-btn">取消</button>
-                    <button class="keep-btn">保存</button>
-                </el-col>
-              </el-row>
-          </div>
-
-       </el-col>     -->
      </el-row>
      <div>
       
@@ -179,7 +150,7 @@
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible = false">取 消</el-button>
            
-            <el-button type="primary" @click="">确 定</el-button>
+            <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
           </div>
     </el-dialog>
     <!-- 账号信息弹窗 -->
@@ -204,7 +175,7 @@
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible2 = false">取 消</el-button>
            
-            <el-button type="primary" @click="">确 定</el-button>
+            <el-button type="primary" @click="dialogFormVisible2 = false">确 定</el-button>
           </div>
     </el-dialog>
     <!-- 医生信息 -->
@@ -233,7 +204,7 @@
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogFormVisible3 = false">取 消</el-button>
            
-            <el-button type="primary" @click="">确 定</el-button>
+            <el-button type="primary" @click="dialogFormVisible3 = false">确 定</el-button>
           </div>
     </el-dialog>
    </div>
@@ -242,20 +213,15 @@
 
 import Vue from 'vue';
 import myUpload from 'vue-image-crop-upload/upload-2.vue';
-
-
   export default{
-
     components: {
       'my-upload': myUpload
     },
-   
     data:function(){
       return{
           dialogFormVisible:false,
           dialogFormVisible2:false,
           dialogFormVisible3:false,
-
           show: false,
           params: {
             token: '123456798',
@@ -265,8 +231,6 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
             smail: '*_~'
           },
           imgDataUrl: '' ,
-      
-
           personalInfo:
               {
                 type:"",
@@ -293,8 +257,7 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
                 department:"",
                 goodat:"",
                 intro:""
-              }
-          
+              } 
       }
     },
     methods:{
@@ -450,13 +413,10 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
     }
   }
 </script>
-
-
-
-
-
-
 <style>
+#jm-Person{
+  background-color: white;
+}
 #jm-Person .cancle-btn{
   color: #bbb;
   box-shadow: 1px 1px 8px #ccc;

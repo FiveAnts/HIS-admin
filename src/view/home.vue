@@ -1,8 +1,8 @@
 <template>
 	<div id='jm-home'>
 	    <div>
-	    	<el-row :gutter="30">
-	    	  <el-col :xs="24" :sm="24" :md="15" :lg="15">
+	    	<el-row :gutter="30" style="margin-right:0px;">
+	    	  <el-col :xs="23" :sm="23" :md="15" :lg="15">
 	    	  	 <div class="today-booking">
 		    		<div class='booking-title'>
 		    		   <span style="font-weight:bold;">今日预约</span>
@@ -20,7 +20,7 @@
 		    	</div>
 
 	    	 </el-col>
-	    	  <el-col :xs="24" :sm="24" :md="9" :lg="9">
+	    	  <el-col :xs="23" :sm="23" :md="9" :lg="9">
 	    	  	 <div class="today-scheduling gap">
 		    		<div class='booking-title'>
 		    		   <span style="font-weight:bold;">今日排班</span>
@@ -36,8 +36,8 @@
 	    	  </el-col>
 	    	  
 	    	</el-row>
-	    	<el-row :gutter="30">
-	    	  <el-col :xs="24" :sm="24" :md="15" :lg="15">
+	    	<el-row :gutter="30" style="margin-right:0px;">
+	    	  <el-col :xs="23" :sm="23" :md="15" :lg="15">
 	    	  	 <div class="today-booking gap-y" id='count'>
 	    	  	 	<div class='booking-title'>
 	    	  	 	   <span style="font-weight:bold;">月度统计(过去三十天)</span>
@@ -50,7 +50,7 @@
 	    	  	 </div>
 
 	    	  </el-col>
-	    	  <el-col :xs="24" :sm="24" :md="9" :lg="9">
+	    	  <el-col :xs="23" :sm="23" :md="9" :lg="9">
 	    	  	 <div class="today-scheduling gap gap-y">
 	    	  	 	<div class='booking-title'>
 	    	  	 	   <span style="font-weight:bold;">最新动态</span>
@@ -66,11 +66,7 @@
 	    	  	 </div> 
 	    	  </el-col>	    	  
 	    	</el-row>
-
-	    
-
-	    </div>
-		
+	    </div>	
 	</div>
 </template>
 <script>
@@ -207,15 +203,12 @@ import Vue from 'vue'
 	width: 260px;
 	float:left;
 	margin-right: 35px;
-	/*border: 1px solid #333;*/
 }
 #jm-home #echarts canvas,#echart2 canvas{
 	height: 350px !important;
 	width: 300px !important;
 }
-#jm-home .gap{
-	/*margin-left: 18px;*/
-}
+
 #jm-home .gap-y{
 	margin-top: 20px;
 }
@@ -235,12 +228,10 @@ import Vue from 'vue'
  }
  #jm-home .booking-title{
  	font-size: 16px;
- 	/*font-weight: bold;*/
  	padding: 8px 16px;
  	letter-spacing: 1px;
  	border-bottom: 1px solid #F1F1F1;
  	background-color: #FBFBFB;
-/* 	font-family: '微软雅黑';*/
  }
  #jm-home .more{
     color: #77d0a4;

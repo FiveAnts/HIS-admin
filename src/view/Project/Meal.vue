@@ -1,23 +1,23 @@
 <template>
 	<div class="mealContainer">
-		<el-form :inline="true"  class="demo-form-inline search-nav" :model="formInline">
+		<el-form :inline="true"  class="demo-form-inline search-nav" style="margin-bottom:40px;" v-model="inputForm">
   			<el-form-item label="套餐分类：" >
-    			<el-select  placeholder="请选择" v-model="formInline.classify">
+    			<el-select  placeholder="请选择" v-model="inputForm.classify">
       				<el-option v-for="cl in classify" v-bind:label="cl.val" v-bind:value="cl.val" :key="1">
       				</el-option>
     			</el-select>
   			</el-form-item>
   			<el-form-item label="套餐名称">
-    			<el-input  placeholder="请输入套餐名称" v-model="formInline.name"></el-input>
+    			<el-input  placeholder="请输入套餐名称" v-model="inputForm.name"></el-input>
   			</el-form-item>
   			<el-form-item label="启用状态： ">
-    			<el-select placeholder="请选择" v-model="formInline.state">
+    			<el-select placeholder="请选择" v-model="inputForm.state">
      				<el-option label="警用" value="forbidden"></el-option>
      				<el-option label="启用" value="startUse"></el-option>
     			</el-select>
   			</el-form-item>
   			<el-form-item>
-   			 	<el-button  icon="search" @click="getSelectData"></el-button>
+   			 	<el-button  icon="search"></el-button>
   			</el-form-item>
   			<el-form-item>
    			 	<el-button @click="" class="btn-add"><router-link to="/project/addMeal">新增套餐</router-link></el-button>
@@ -44,8 +44,7 @@
 	    			启用状态
 	    		</el-col>
 	    		<el-col  :span="5" >
-	    			操作
-	    			      				
+	    			操作      				
 	    		</el-col>
 	    	</el-row>
 	    	<el-row class="tac" v-for="(item,index) in infoItems" :key="index">
@@ -59,15 +58,7 @@
 	    			{{item.name}}
 	    		</el-col>
 	    		<el-col  :span="4"  > 
-	    		<!--mark <el-col  :span="4"  v-popover:popover1>  :不生效 -->
       				<img src="../../assets/img/Project/62.png">
-      				<!-- <div>88
-	      				<el-popover ref="popover1" placement="bottom" title="标题" width="200" trigger="hover" >
-	      					<p>姓名: </p>
-	   						<p>住址:</p>
-						</el-popover>
-      				</div> -->
-      				
 	    		</el-col>
 	    		<el-col  :span="3">
 	    			{{item.location}}
@@ -113,12 +104,11 @@
 	    	</el-dialog>
 				
 		</div>
-		<el-pagination small layout="prev, pager, next,sizes,jumper" :total="100" class="page-nav" :page-sizes="[10, 20, 30, 40]" >
+		<el-pagination small layout="prev, pager, next,sizes,jumper" :total="100" class="page-nav" :page-sizes="[10, 20, 30, 40]" @size-change=""  @current-change="">
         </el-pagination>
 	</div>
 </template>
 <script type="text/javascript">
-    import store from '../../store/Project/item.js'
 	export default {
 		data: function () {
 	    	return {
@@ -130,52 +120,52 @@
 		        	"office": "",
 		        	"location": "",
 		        	"relateItem":"",
-		        	"state": true
+		        	"state": true,
         	    }, 
+        	    inputForm: {
+    	    		"classify":"",
+    	    		"state":"",
+    	    		"name":"",
+        	    },
         	    editIndex:'',
-	    		editDialogSeen: false,
-	    		 
+	    		editDialogSeen: false, 
 		    }
 	    },
 	    computed:{
         	infoItems :  function (){
-        		return store.state.infoItems;
+        		return this.$store.state.item.infoItems;
 			},
 			classify :  function (){
-        		return store.state.classify;
+        		return this.$store.state.item.classify;
 			},
-			formInline : function(){
-				return store.state.formInline;
-			}
         },
 	    methods: {
-		    getRowInfo:function(index,item) {
+	    	//编辑：获得某一行的数据
+		    getRowInfo(index,item) {
 		        this.editDialogSeen=true;
 		        this.editItem=JSON.parse(JSON.stringify(item));
 		        this.editIndex=index;
 		    },
-		    handleEdit:function(index) {
+		    //编辑：编辑某一行的数据
+		    handleEdit(index) {
 		        this.infoItems[index]=this.editItem;
 		        this.$notify.success({
 		          	title: '成功',
 		          	message: '修改成功',
 		         	offset: 100,
 		        });
-		         console.log(this.infoItems[index]);
+		        console.log(this.infoItems[index]);
 		        this.editDialogSeen=false;
 		    },
-		    getData:function(){
+		    //获取state中的数据
+		    getData(){
 				this.$store.commit('getData')
 			},
-			getSelectData:function(){
-				/*this.$store.commit('getSelectData')*/
-			},
-
         },
         mounted:function(){
 			//mounted是在vue实例化完成后，执行。相当于jq中的ready
-				//$(document).ready(function(){ })
 		    this.getData();
+		    this.updateInfo();
 		},
 
 

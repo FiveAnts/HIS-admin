@@ -82,8 +82,8 @@
              	<label>{{changeType.name}}</label>
             </el-form-item>
         	<el-form-item label="关联项目：" prop="relateItem" class="associtedItem">
-	    		<el-input></el-input>
-	    		<a class="a-add"><img src="../../assets/img/Project/25.png"></a>
+	    		<el-input v-model="inputListval"></el-input>
+	    		<a class="a-add" @click="addListInfo(changeType)"><img src="../../assets/img/Project/25.png"></a>
 	  		</el-form-item>	   
            	<div class="changeList-table">
 	  			<el-row v-for="(list,index) in changeType.listInfo" :key="1">
@@ -100,7 +100,7 @@
 		  	</div>
             </el-form>
             <div slot="footer" class="dialog-footer">
-            	<el-button @click="changeDialogSeen = false;markselect=''" class="canel-btn">取 消</el-button>
+            	<el-button @click="changeDialogSeen = false;" class="canel-btn">取 消</el-button>
             	<el-button type="primary" @click="" class="print-btn">打 印</el-button>
             </div>
     	</el-dialog>
@@ -150,7 +150,7 @@
 				</el-row>
             </el-form>
             <div slot="footer" class="dialog-footer">
-            	<el-button @click="addDialogSeen = false" class="canel-btn">取 消</el-button>
+            	<el-button @click="addDialogSeen = false;markselect=''" class="canel-btn">取 消</el-button>
             	<el-button type="primary" @click="" class="print-btn">打 印</el-button>
             </div>
     	</el-dialog>
@@ -159,7 +159,6 @@
 	</div>
 </template>
 <script type="text/javascript">
-	import store from '../../store/Project/item.js'
 	export default {
 		data: function () {
 	    	return {
@@ -168,6 +167,7 @@
 	    		addDialogSeen: false,
 	    		markselect:'',
 	    		inputVal:'',
+	    		inputListval:'',
 	    		changeType:{
 	    			name:'',
 	    			listInfo: [],
@@ -199,49 +199,53 @@
 			    			{name:"诊查费",price:"200"}
 		    			]
 	    			},
-	    			{name:"加号",state:false},
-	    			{name:"专家",state:false},
-	    			{name:"会员加号",state:false},
+	    			{name:"加号",state:false,listInfo:{}},
+	    			{name:"专家",state:false,listInfo:{}},
+	    			{name:"会员加号",state:false,listInfo:{}},
 	    		]	 
 		    }
 	    },
 	    methods: {
-		    getRowInfo:function(index,item) {
+	    	//编辑：获得某一行的数据
+		    getRowInfo(index,item) {
 		        this.editDialogSeen=true;
 		        this.editItem=JSON.parse(JSON.stringify(item));
 		        this.editIndex=index;
 		    },
-		    editRegfee:function(index) {
+		    //编辑：编辑某一行的数据
+		    editRegfee(index) {
 		        this.infoItems[index]=this.editItem;
 		         this.$notify.success({
 		          	title: '成功',
 		          	message: '修改成功',
 		         	offset: 100,
 		        });
-		         console.log(this.infoItems[index]);
 		        this.editDialogSeen=false;
 		    },
+		    //
 		    handleEdit(typel,index) {
 		        this.markselect=index;
 		        this.changeDialogSeen=true;
 		        this.changeType=typel;
 		    },
+		    //获取state中的数据
 		    getData(){
 				this.$store.commit('getData')
 			},
-			getSelectData(){
-				this.$store.commit('getSelectData')
-			},
+			//增加挂号费类型
 			addType(){
 				var val="加号";
-				this.typeList.push({name:val,state:false});
+				this.typeList.push({name:val,state:false,listInfo:''});
 			},
+			//删除挂号费类型
 			deleteType(index){
 				this.typeList.splice(index,1);
 			},
+			//删除某挂号费的关联项目
 			dleRelateItem(index){
 				this.changeType.listInfo.splice(index,1);
 			},
+			//保存修改
 			saveChange(index){
 				var val=this.inputVal.trim();
 				if(!val){
@@ -258,7 +262,7 @@
         },
 	    computed:{
 	    	infoItems :  function (){
-	    		return store.state.infoItems;
+	    		return this.$store.state.item.infoItems;
 			},
 	    },
         mounted: function(){
@@ -475,6 +479,9 @@
 	.regFeeContainer .el-dialog--small{
 		width: 40%;
 		min-width: 445px;
+	}
+	.regFeeContainer .el-dialog{
+		text-align: left;
 	}
 
 </style>

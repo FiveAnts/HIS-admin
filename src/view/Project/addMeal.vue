@@ -1,12 +1,5 @@
 <template>
 	<div class="addMealApp">
-		<el-breadcrumb separator="/">
-			<el-breadcrumb-item>
-				<a @click="backPage()" class="backAlink"><img src="../../assets/img/Project/20.png">&nbsp;&nbsp;</a>
-			</el-breadcrumb-item>
-			<el-breadcrumb-item >当前位置：项目</el-breadcrumb-item>
-		  	<el-breadcrumb-item >新增套餐</el-breadcrumb-item>
-		</el-breadcrumb>
 		<div class="addMealContainer">
 			<el-form  :rules="rules" :model="ruleForm" ref="ruleForm" label-width="100px" class="demo-ruleForm form-add-meal" >
 			    <el-row><h4>&nbsp;新增套餐</h4></el-row>
@@ -135,9 +128,6 @@
             };
         },
 	   methods: {
-	   		backPage(){
-    			this.$router.go(-1);
-    	 	},
     	 	submitMeal(){
     			console.log("新增项目: ",this.ruleForm);
     	    }
@@ -153,10 +143,6 @@
 	}
 	.addMealApp .el-breadcrumb__item:last-child .el-breadcrumb__separator,.addMealApp .el-breadcrumb__item:first-child .el-breadcrumb__separator {
     	display: none;
-    }
-    .addMealApp .backAlink>img{
-    	position: relative;
-    	top:11px;
     }
 	.addMealApp .el-breadcrumb {
 	    line-height: 60px;

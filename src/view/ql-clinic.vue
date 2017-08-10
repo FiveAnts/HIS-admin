@@ -830,8 +830,7 @@
     background-position: 0 0;
 }
 .ql-clinic .el-submenu__icon-arrow {
-
-    right: 893px;
+    right: 910px;
     margin-top: -4px;
 
 }

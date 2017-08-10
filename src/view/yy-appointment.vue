@@ -139,7 +139,7 @@
 				        <span style="line-height: 24px;">{{ scope.row.yourDoctor }}</span> 
 				      </template>
 				    </el-table-column>
-				    <el-table-column label="患者姓名">
+				    <el-table-column label="主诉">
 				      <template scope="scope">
 				         <div style="display: inline-block;">
 		  			      	<span style="line-height: 24px;">{{ scope.row.yourComplain }}</span>
@@ -186,7 +186,57 @@
 				 </div>
 			</div>
 		  </el-tab-pane>
-		  <el-tab-pane label="可预约查询" name="third">可预约查询</el-tab-pane>
+		  <!-- 可预约查询 -->
+		  <el-tab-pane label="可预约查询" name="third">
+			<div class="allAppoint allAppointQuery" style="padding: 16px 22px;">
+				<span> <el-button icon="arrow-left"></el-button><el-input placeholder="本周"></el-input> <el-button icon="arrow-right"></el-button></span>
+			    <el-date-picker
+			      v-model="value1"
+			      type="date"
+			      placeholder="2016-09-18"
+			      :picker-options="pickerOptions0">
+			    </el-date-picker>
+			    <i class=" stateIcon icon-img rightIcon"></i>
+			    <span>科室:</span>
+			    <el-select v-model="value" placeholder="全部科室" >
+			      <el-option
+			        v-for="item in options"
+			        :key="item.value"
+			        :label="item.label"
+			        :value="item.value">
+			      </el-option>
+			     </el-select>
+			    <span>出诊医生:</span>
+			    <el-select v-model="value" placeholder="所有" >
+			      <el-option
+			        v-for="item in doctorName"
+			        :key="item.value"
+			        :label="item.label"
+			        :value="item.value">
+			      </el-option>
+			    </el-select>
+			    <i class="el-icon-search stateIcon"></i>
+			    <router-link to="/booking/newAppoint"> <i class="el-icon-plus stateIcon" style="margin-left: 10px; "></i></router-link>
+			</div>
+			<div class="allAppoint allAppointRemain">
+				<div class="remainWeek">
+					<div class="remainDay" v-for="remain in remainNum">
+						<p style="border-bottom: 1px solid  #dfe6ec;padding-bottom: 10px;margin-bottom: 10px;font-weight: bold;">{{remain.day}}<br>{{remain.date}}</p>
+						<el-button type="primary" size="mini" v-if="remain.num>0">余号量</el-button><el-button size="mini" v-if="remain.num>0">{{remain.num}}</el-button>
+						<el-button size="mini" v-if="remain.num==0" style="background: rgb(182, 182, 182);border-color:#B6B6B6;color:#000;">余号量</el-button><el-button size="mini" v-if="remain.num==0" style="border-color:#B6B6B6;color:#B6B6B6;">{{remain.num}}</el-button>
+						<p v-if="remain.num<0" style="line-height: 20px;color: #B6B6B6;">暂无排班</p>
+					</div>
+				</div>
+			</div>
+			<div class="allAppoint allAppointRemain">
+				<div class="remainWeek">
+					<div class="remainDay" v-for="money in remainMoney" style="width: 25%;text-align: center;">
+						<p style="border-bottom: 1px solid  #dfe6ec;padding-bottom: 10px;margin-bottom: 10px;padding-left: 10px;font-weight: bold;">{{money.actor}}</p>
+					</div>
+					<p style="line-height: 20px;color: #B6B6B6;text-align: center;">暂无记录</p>			
+				</div>
+			</div>
+		  </el-tab-pane>
 		</el-tabs>
 
 	</div>
@@ -202,6 +252,8 @@
 	}
 	#yy-appointment{
 		background: #F6F6F6;
+		font-size: 14px;
+		font-family: "微软雅黑";
 	}
 /*	.yy-tabs{
 		width: 80%;
@@ -256,19 +308,19 @@
 		color: black;
 		font-weight: bold;
 	}
-	.el-button+.el-button {
+	#yy-appointment .el-button+.el-button {
 	     margin-left: 0px; 
 	}
-	.el-button--mini {
+	#yy-appointment .el-button--mini {
 	    border-radius: 4px 0 0 4px;
 	}
-	.el-button--mini:nth-child(3) {
+	#yy-appointment .el-button--mini:nth-child(3) {
 		color: #7CB9EF;
    		border-radius: 0 4px 4px 0;
 	    border-color: #7CB9EF;
 	    letter-spacing: 0.5px;
 	}
-	.el-button--primary {
+	#yy-appointment .el-button--primary {
 	    background-color: #83b9eb;
 	    border-color: #7CB9EF;
 	    letter-spacing: 0.5px;
@@ -344,6 +396,7 @@
 		box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
 		border-radius: 7px;
 		padding: 16px;
+		/*padding: 16px 0;*/
  	}
  	.allAppoint .patient{
  		display: inline;
@@ -375,6 +428,7 @@
  	}
 	.allAppointList .el-table .cell {
 	    text-align: left;
+	    font-size: 16px;
 	}
 	.allAppointList .el-tag {
 	    background-color: #C7C7C7;
@@ -404,6 +458,50 @@
 	.allAppointPage .el-pager li:last-child {
 	     border-right: none; 
 	}
+	/*可预约查询*/
+	.allAppoint .icon-img{
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		vertical-align: middle;
+		position: relative;
+		top: -2px;
+		margin-right: 5px;
+		display: inline-block;
+		background-position: 0 0;
+	}
+	.allAppoint .rightIcon{
+		width: 16px;
+		height: 16px;
+		background-size: 59% 83%; 
+		background-position: 7px 3px;
+		background-image: url(../assets/yy/右箭头.png);
+	}
+	.allAppointQuery .el-date-editor.el-input {
+	    width: 126px;
+	}
+	.allAppointQuery span .el-input{
+		width: 100px;
+		box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+		text-align: center;
+	}
+	.allAppointQuery span .el-input .el-input__inner{
+		padding: 3px 31px;
+	}
+	.allAppointQuery span .el-button{
+		padding: 7px 7px;
+		border-radius: 15px;
+		margin-right: 12px;
+		box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+	}
+	.allAppointRemain{
+		margin-top: 20px;
+		padding: 16px 0;
+	}
+	.remainDay{
+		width: 14.28%;
+		text-align: center;
+		display: inline-block;
+	}
 </style>
 
 <script>
@@ -413,6 +511,7 @@
 	      return {
 	        activeName: 'first',
 	        value6: '',
+	        value1: '',
 	        input: '',
 	        currentPage4: 4,
 	        options: [{
@@ -464,6 +563,26 @@
 	          yourComplain: '病情描述文字太多会换行......',
 	          state: '0'
 	        }], 
+	        pickerOptions0: {
+	          disabledDate(time) {
+	            return time.getTime() < Date.now() - 8.64e7;
+	          }
+	        },
+	        remainNum: [{
+	        	day:"今天",
+	        	date:"09-18",
+	        	num:'0'
+	        }
+	        ],
+	        remainMoney: [{
+	        	actor: "可预约时间段"
+	        },{
+	        	actor: "出诊医生"
+	        },{
+	        	actor: "诊金(元)"
+	        },{
+	        	actor: "操作"
+	        }]
 	        // doctorData: {
 	        // 	date: "09:00~11:00",
 	        // 	Drname: "刘医生",
@@ -618,6 +737,7 @@
 		    		re.doctorName = response.data.appointment.doctorName;
 		    		re.doctorState = response.data.appointment.doctorState;
 		    		re.allAppointData = response.data.appointment.allAppointData;
+		    		re.remainNum = response.data.appointment.remainNum;
 		    		console.log("哈哈哈",response.data.appointment)
 		    		console.log(response.data.appointment)
 		    	},function(){

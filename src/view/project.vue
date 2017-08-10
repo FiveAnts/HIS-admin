@@ -22,20 +22,13 @@
 	</div>
 </template>
 <script>
-	import store from '../store/Project/item.js'
 	export default {
 		data() {
 	    	return {
+	    		activeIndex:'1',
 	        	
 	      	};
     	},
-    	computed:{
-    		activeIndex: {
-    			get () {
-    				return store.state.projectTab;
-    			},
-    		}
-        },
 	}
 	</script>
 

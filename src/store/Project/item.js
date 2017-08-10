@@ -1,18 +1,11 @@
-import Vue from 'vue'   //因为vue导入的不是全局的
-import Vuex from 'vuex'
-Vue.use(Vuex);
-const Project =new Vuex.Store({
+import Vue from 'vue';
+const item={
 	 // 存储状态值
 	state: {
 		projectTab:'1',
 		infoItems:[],
 		selectItems:[],
 		classify:[],
-		formInline: {
-  			classify: "",
-  			state: "",
-  			name:""
-		}
 	},
 	mutations: {
 		getData(state){
@@ -22,12 +15,9 @@ const Project =new Vuex.Store({
 				k.infoItems=response.data.infoItems;
 				k.classify=response.data.classify;
 			}, function(response){
-				alert("请求失败了")
+				this.$message('请求失败.');
 			})
 		},
-		updateProjectTab (state, message) {
-		    state.projectTab = message;
-		},
 	},
-});
-export default Project
+};
+export default item;

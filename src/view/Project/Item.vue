@@ -1,23 +1,23 @@
 <template>
 	<div class="itemContainer">
-		<el-form :inline="true"  class="demo-form-inline search-nav" :model="formInline">
+		<el-form :inline="true"  class="demo-form-inline search-nav" style="margin-bottom:40px;" v-model="inputForm">
   			<el-form-item label="项目名称：">
-    			<el-input  placeholder="请输入项目名称" v-model="formInline.name"></el-input>
+    			<el-input  placeholder="请输入项目名称" v-model="inputForm.name"></el-input>
   			</el-form-item>
   			<el-form-item label="项目分类：" >
-    			<el-select  placeholder="请选择" v-model="formInline.classify">
+    			<el-select  placeholder="请选择" v-model="inputForm.classify">
       				<el-option v-for="cl in classify" v-bind:label="cl.val" v-bind:value="cl.val" :key="1">
       				</el-option>
     			</el-select>
   			</el-form-item>
   			<el-form-item label="启用状态： ">
-    			<el-select placeholder="请选择" v-model="formInline.state">
+    			<el-select placeholder="请选择" v-model="inputForm.state">
      				<el-option label="警用" value="forbidden"></el-option>
      				<el-option label="启用" value="startUse"></el-option>
     			</el-select>
   			</el-form-item>
   			<el-form-item>
-   			 	<el-button  icon="search" @click="getSelectData"></el-button>
+   			 	<el-button  icon="search" ></el-button>
   			</el-form-item>
   			<el-form-item>
    			 	<el-button @click="" class="btn-add"> <router-link to="/project/addItem">新增项目</router-link></el-button>
@@ -118,7 +118,7 @@
 	</div>
 </template>
 <script type="text/javascript">
-	import store from '../../store/Project/item.js'
+	/*import store from '../../store/Project/item.js'*/
 	export default {
 		data: function () {
 	    	return {
@@ -135,15 +135,22 @@
         	    }, 
         	    editIndex:'',
 	    		editDialogSeen: false,
+	    		inputForm: {
+    	    		"classify":"",
+    	    		"state":"",
+    	    		"name":"",
+        	    },
 	  
 		    }
 	    },
 	    methods: {
+	    	//编辑：获得某一行的数据
 		    getRowInfo:function(index,item) {
 		        this.editDialogSeen=true;
 		        this.editItem=JSON.parse(JSON.stringify(item));
 		        this.editIndex=index;
 		    },
+		    //编辑：编辑改行的数据
 		    handleEdit:function(index) {
 		         this.infoItems[index]=this.editItem;
 		         this.$notify.success({
@@ -154,37 +161,21 @@
 		         console.log(this.infoItems[index]);
 		        this.editDialogSeen=false;
 		    },
+		    //从state中获得数据
 		    getData:function(){
 				this.$store.commit('getData');
 			},
-			getSelectData:function(){
-				console.log(this.formInline.classify);
-				if(this.formInline.classify!==""){
-					for(let i=0,j=0;i<this.infoItems.length;i++){
-						if(this.infoItems[i].classify===this.formInline.classify){
-								j++;
-								this.selectItems[j]=this.infoItems[i];
-						}
-					}
-				}
-				this.infoItems=this.selectItems;
-
-			},
-
         },
         computed:{
         	infoItems : {
         		get: function (){
-        			return store.state.infoItems;
+        			return this.$store.state.item.infoItems;
 			    },
 
         	},
 			classify :  function (){
-        		return store.state.classify;
+        		return this.$store.state.item.classify;
 			},
-			formInline : function(){
-				return store.state.formInline;
-			}
 
         },
         mounted:function(){
@@ -316,6 +307,9 @@
 	.itemContainer .editDialog .submit-btn{
 		background-color: #1FD27D;
 		border-color: #1FD27D;
+	}
+	.itemContainer .el-dialog{
+		text-align: left;
 	}
 	.itemContainer .el-dialog--small{
 		width: 40%;

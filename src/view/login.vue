@@ -1,22 +1,22 @@
 <template>
   <div class="login">
-    <el-form class="login-content">
+    <el-form class="login-content"  @keyup.13.native="msgalert">
       <img class="login-img" src="../assets/img/98.png" />
       <span class="login-span">
         <img class="login-img2" src="../assets/img/99.png" />
-        <el-input type="text" v-model="form.orgCode" class="login-input" placeholder="请输入机构编码"></el-input>
+        <el-input type="text" v-model="formInofo.orgCode" class="login-input" placeholder="请输入机构编码" ></el-input>
       </span>
       <span class="login-span">
         <img class="login-img2" src="../assets/img/101.png" />
-        <el-input type="text" v-model="form.userName" class="login-input" placeholder="请输入用户名"></el-input>
+        <el-input type="text" v-model="formInofo.userName" class="login-input" placeholder="请输入用户名"></el-input>
       </span>
       <span class="login-span">
         <img class="login-img2" src="../assets/img/103.png"/>
-        <el-input type="password" v-model="form.psd"  class="login-input" placeholder="请输入密码"></el-input>
+        <el-input type="password" v-model="formInofo.psd"  class="login-input" placeholder="请输入密码"></el-input>
       </span>
       <el-button class="login-btn" @click="msgalert()">登录</el-button>
     </el-form>
-    <p class="login-p">Copyright © 2014-2017 Benewit. All Rights Reserved.广东百慧信息技术有限公司</p>
+    <p class="login-p">Copyright © 2017-2017 两个个登录账号信息：(1,1,1)、(0,zero,0)</p>
     <router-view></router-view>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   name: 'login',
   data: function() {
     return {
-      form: {
+      formInofo: {
         "orgCode": "",
         "userName": "",
         "psd": ""
@@ -35,29 +35,29 @@ export default {
   },
   methods: {
     msgalert () {
-      if (this.form.orgCode === "") {
+      if (this.formInofo.orgCode === "") {
         this.$message('机构编码不得为空');
-      }else if(this.form.userName === ""){
+      }else if(this.formInofo.userName === ""){
         this.$message('用户名不得为空');
-      }else if(this.form.psd === ""){
+      }else if(this.formInofo.psd === ""){
         this.$message('密码不得为空');
-      }else if(this.form.orgCode !== "" && this.form.userName !== "" && this.form.psd !== ""){
-        let current = this.form;
-        let count = 0;
-        // console.log("用户输入的数据", this.form);
+      }else if(this.formInofo.orgCode !== "" && this.formInofo.userName !== "" && this.formInofo.psd !== ""){
+        let current = this.formInofo;
+        let mark = 0;
         this.$http.get('../../../static/dataJson/login.json').then(function(res){
           for(let i = 0; i <= res.data.data.length-1; i++){
-            if(current.orgCode === res.data.data[i].orgCode && current.userName === res.data.data[i].userName && current.psd === res.data.data[i].psd){
-              count++;
+            if(current.orgCode === res.data.data[i].orgCode && current.userName === res.data.data[i].userName && current.psd === res.data.data[i].psd&&mark==0){
+                mark=1;
+                window.sessionStorage.setItem("Info",JSON.stringify(this.formInofo));
             }
           }
-          if(count == 1){
-            this.$router.push({path: '/reghttp'});
+          if(mark == 1){
+            this.$router.push({path: '/'});
           }else{
             this.$message('机构编码、用户名或者密码不正确');
-            this.form.orgCode = "";
-            this.form.userName = "";
-            this.form.psd = "";
+            this.formInofo.orgCode = "";
+            this.formInofo.userName = "";
+            this.formInofo.psd = "";
           }
         },function(res){
           this.$message('The Request is Failed.');
