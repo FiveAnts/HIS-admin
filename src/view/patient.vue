@@ -3,8 +3,8 @@
 	<el-tabs v-model="current">
 		<el-tab-pane label="患者档案" name="patientFiles">
 			<p class="patp">
-				患者：<el-input placeholder="请输入姓名/手机号" style="width: 200px;"></el-input>
-				<el-button icon="search" class="patbtn patbtn-s"></el-button>
+				患者：<el-input placeholder="请输入姓名/手机号" style="width: 200px;" v-model="inputVal"></el-input>
+				<el-button icon="search" class="patbtn patbtn-s" @click="searchPatient"></el-button>
 				<el-button class="patbtn patbtn-c" @click="gotoPI">新建档案</el-button>
 			</p>
 			<el-table :data="list">
@@ -45,7 +45,8 @@ export default {
 	data: function () {
 		return {
 			current: "patientFiles",
-			list:[]
+			list:[],
+			inputVal:'',
 		}
 		
 	},
@@ -55,11 +56,14 @@ export default {
 	methods: {
 		getList() {
 			this.$http.get("../../../static/dataJson/patient.json").then(function(res){
-				// this.$message('Hello, welcome to my world.');
-				for(let i = 0; i < res.data.data.length; i++){
-					this.list = res.data.data;
-					console.log(this.list);
-				}
+				this.list = res.data.data;
+			}, function(res){
+				this.$message("The Request is Failed.");
+			})
+		},
+		searchPatient(inputVal){
+			this.$http.get("../../../static/dataJson/onePatient.json",{params:inputVal}).then(function(res){
+				this.list = res.data.data;
 			}, function(res){
 				this.$message("The Request is Failed.");
 			})
@@ -78,6 +82,8 @@ export default {
 .patp{
 	margin-left: 22px;
 	font-size: 14px;
+	margin-bottom: 25px;
+	margin-top:10px;
 }
 .patbtn{
 	background: #22D185;

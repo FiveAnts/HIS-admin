@@ -17,7 +17,6 @@
 						<a><img src="../assets/img/98.png"></a>
 						<li>注册机构</li>
 					</div>
-
 				</div>
 				<div  class="tabNav" style="">
 				  	<div class="tab-menu" style="display: inline-block;height: 40px;">
@@ -78,17 +77,14 @@
 									<span>上传《医疗执业资格证》：（需清晰、完整）</span>
 								</el-col>
 								<el-col :span="12">
-									<!-- <el-upload
-									  	action="https://jsonplaceholder.typicode.com/posts/"
-									  	list-type="picture-card"
-									  	:on-preview="handlePictureCardPreview"
-									  	:on-remove="handleRemove"> -->
 									<el-upload
 									  	action="https://jsonplaceholder.typicode.com/posts/"
-									  	list-type="picture-card">
+									  	list-type="picture-card"
+									  	:on-success="handleImg1"
+									>
 									  	<i class="el-icon-plus"></i>
 									</el-upload>
-									<el-dialog  size="tiny">
+									<el-dialog  size="tiny" :on-success="handleImg1">
 									  <img width="100%" :src="tabPancel2Info.img" alt="" >
 									</el-dialog>
 									<div style="min-height:50px;line-height:50px;height:auto;">
@@ -125,10 +121,10 @@
 										<el-upload
 										  	action="https://jsonplaceholder.typicode.com/posts/"
 										  	list-type="picture-card"
-										  	style="height:80px;">
+										  	style="height:80px;" :on-success="handleImg2">
 										  	<i class="el-icon-plus"  style="position:relative;top:-30px;"></i>
 										</el-upload>
-										<el-dialog v-model="dialogVisible" size="tiny">
+										<el-dialog v-model="dialogVisible" size="tiny" :on-success="handleImg2">
 										  <img width="100%" :src="dialogImageUrl" alt="">
 										</el-dialog>
 										<div style="min-height:40px;line-height:40px;height:auto;">
@@ -187,7 +183,7 @@
 					  		<el-form-item label="真实姓名：" >
 					   			<el-input placeholder="请输入您的真实姓名，以便联系" v-model="tabPancel4Info.name"></el-input>
 					   			<label  role="colored" v-if="tabPancel4Info.name===''"></label>
-					   			<label  role="colored" v-else-if="tabPancel4Info.name.length<4">请输入正确的名字</label>
+					   			<label  role="colored" v-else-if="tabPancel4Info.name.length<2">请输入正确的名字</label>
 					   			<label  role="colorgreen" v-else><i class="fa fa-check-circle " ></i></label>
 					  		</el-form-item>
 					  		<el-form-item label="联系电话：">
@@ -313,7 +309,7 @@
 			Complete(){
 				let that=this;
 				let isEmail=this.emailre.test(this.tabPancel4Info.email);
-				if(this.tabPancel4Info.pwd!==this.tabPancel4Info.secondPwd || this.tabPancel4Info.name.length<4 || !isEmail){
+				if(this.tabPancel4Info.pwd!==this.tabPancel4Info.secondPwd || this.tabPancel4Info.name.length<2 || !isEmail){
 					this.$notify.warning({
 			          	title: '警告',
 			          	message: '警告，请填写正确格式的信息!',
@@ -330,8 +326,11 @@
 					that.$router.push({path: '/login'});
 				}
 			},
-			handleAvatarSuccess(res, file) {
-		        this.imageUrl = URL.createObjectURL(file.raw);
+			handleImg1(res, file) {
+		        this.tabPancel2Info.img = URL.createObjectURL(file.raw);
+		    },
+		    handleImg2(res, file) {
+		        this.tabPancel3Info.img = URL.createObjectURL(file.raw);
 		    },
 	        beforeAvatarUpload(file) {
 	        	const isJPG = file.type === 'image/jpeg';
