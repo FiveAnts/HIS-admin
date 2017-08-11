@@ -3,8 +3,8 @@
 	<el-tabs v-model="current">
 		<el-tab-pane label="患者档案" name="patientFiles">
 			<p class="patp">
-				患者：<el-input placeholder="请输入姓名/手机号" style="width: 200px;" v-model="inputVal"></el-input>
-				<el-button icon="search" class="patbtn patbtn-s" @click="searchPatient"></el-button>
+				患者：<el-input placeholder="请输入姓名/手机号" style="width: 200px;" v-model="inputVal" @keyup.enter.native="searchPatient"></el-input>
+				<el-button icon="search" class="patbtn patbtn-s" @click="searchPatient()"></el-button>
 				<el-button class="patbtn patbtn-c" @click="gotoPI">新建档案</el-button>
 			</p>
 			<el-table :data="list">
@@ -61,8 +61,8 @@ export default {
 				this.$message("The Request is Failed.");
 			})
 		},
-		searchPatient(inputVal){
-			this.$http.get("../../../static/dataJson/onePatient.json",{params:inputVal}).then(function(res){
+		searchPatient(){
+			this.$http.get("../../../static/dataJson/onePatient.json",{params:this.inputVal}).then(function(res){
 				this.list = res.data.data;
 			}, function(res){
 				this.$message("The Request is Failed.");
