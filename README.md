@@ -1,5 +1,6 @@
-# my-project
+HIS后台管理系统生产环境
 
+控制台命令如下：
 > A Vue.js project
 
 ## Build Setup
