@@ -206,7 +206,7 @@
    </div>
 </template>
 <script>
-
+import { api } from '@/global/api.js'//引入静态资源
 import Vue from 'vue';
 import myUpload from 'vue-image-crop-upload/upload-2.vue';
   export default{
@@ -265,7 +265,7 @@ import myUpload from 'vue-image-crop-upload/upload-2.vue';
       },
       getData:function(){
         let data=this;
-        Vue.http.get('../../static/json/jm-personalInto.json').then(function(respone){
+        Vue.http.get(api.personalInto).then(function(respone){
              data.personalInfo=respone.data.personalInfo;
              data.accountInfo=respone.data.accountInfo;
              data.doctorInfo=respone.data.doctorInfo;

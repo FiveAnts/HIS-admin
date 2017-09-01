@@ -70,6 +70,7 @@
 	</div>
 </template>
 <script>
+import { api } from '@/global/api.js'//引入静态资源
 import echart from '../../static/echarts.common.min.js'
 import  VueResource  from 'vue-resource'
 
@@ -104,7 +105,7 @@ import Vue from 'vue'
 		methods: {
 				getData:function(){
 		           let data=this;
-		           Vue.http.get('../../static/json/home.json').then(function(respone){
+		           Vue.http.get(api.home).then(function(respone){
 		               console.log(respone.data);
 		               data.todayBook=respone.data.todayBook;
 		               data.todayScheduling=respone.data.todayScheduling;

@@ -367,6 +367,7 @@
 </style>
 
 <script>
+    import { api } from '@/global/api.js'//引入静态资源
 	import Vue from 'vue' 
 	export default {
 	    data() {
@@ -467,7 +468,7 @@
 	    	// 读取json数据
 	    	getData:function(){
 	    		let re = this;
-	    		Vue.http.get('../static/json/yy-appointment.json').then(function(response){
+	    		Vue.http.get(api.appointment).then(function(response){
 	    			re.patientData = response.data.appointment.patientData[0];
 	    			re.ptBooking = response.data.appointment.patientData[0].ptBooking[0];
 	    			re.doctorName = response.data.appointment.doctorName;
@@ -493,7 +494,7 @@
 	    	//修改预约时间的提交
 	    	handleTimeSubmit(){
 	    		let re = this;
-	    		Vue.http.get('../static/json/yy-appointment.json').then(function(response){
+	    		Vue.http.get(api.appointment).then(function(response){
 	    			response.data.appointment.patientData[0].ptTime = re.patientData.ptTime;
 	    			response.data.appointment.patientData[0].ptClock = re.patientData.ptClock;
 	    		})	 
@@ -526,7 +527,7 @@
 	    	//诊前测量的提交
 	    	handleMeasureSubmit(){
 	    		let re = this;
-	    		Vue.http.get('../static/json/yy-appointment.json').then(function(response){
+	    		Vue.http.get(api.appointment).then(function(response){
 	    			// response.data.appointment.patientData[0].ptTime = re.patientData.ptTime;
 	    			// response.data.appointment.patientData[0].ptClock = re.patientData.ptClock;
 	    		})	 

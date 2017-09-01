@@ -41,6 +41,7 @@
   </div>
 </template>
 <script>
+  import { api } from '@/global/api.js'//引入静态资源
   var myDate=new Date();
   var date=myDate.getDay(); //星期几
   var weekDay=new Array('周一','周二','周三','周四','周五','周六','周日');
@@ -81,7 +82,7 @@
         this.username=current.userName;
         let mark = 0;
         let that=this;
-        this.$http.get('../../../../static/dataJson/login.json').then(function(response){
+        this.$http.get(api.login).then(function(response){
             for(let i = 0; i <= response.data.data.length-1; i++){
               if(current.orgCode === response.data.data[i].orgCode && current.userName === response.data.data[i].userName && current.psd === response.data.data[i].psd && mark==0){
                   mark=1;

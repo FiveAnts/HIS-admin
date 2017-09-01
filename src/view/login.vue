@@ -1,27 +1,31 @@
 <template>
-  <div class="login">
-    <el-form class="login-content"  @keyup.13.native="msgalert">
-      <img class="login-img" src="../assets/img/98.png" />
-      <span class="login-span">
-        <img class="login-img2" src="../assets/img/99.png" />
-        <el-input type="text" v-model="formInofo.orgCode" class="login-input" placeholder="请输入机构编码" ></el-input>
-      </span>
-      <span class="login-span">
-        <img class="login-img2" src="../assets/img/101.png" />
-        <el-input type="text" v-model="formInofo.userName" class="login-input" placeholder="请输入用户名"></el-input>
-      </span>
-      <span class="login-span">
-        <img class="login-img2" src="../assets/img/103.png"/>
-        <el-input type="password" v-model="formInofo.psd"  class="login-input" placeholder="请输入密码"></el-input>
-      </span>
-      <el-button class="login-btn" @click="msgalert()">登录</el-button>
-      <div class="regDiv"><router-link to="/register">还没账号？点我去注册</router-link></div>
-    </el-form>
-    <p class="login-p">Copyright © 2017-2017 两个个登录账号信息：(1,1,1)、(0,zero,0)</p>
-  </div>
+<div id='login'>
+   <div class="login">
+     <el-form class="login-content"  @keyup.13.native="msgalert">
+       <img class="login-img" src="../assets/img/98.png" />
+       <span class="login-span">
+         <img class="login-img2" src="../assets/img/99.png" />
+         <el-input type="text" v-model="formInofo.orgCode" class="login-input" placeholder="请输入机构编码" ></el-input>
+       </span>
+       <span class="login-span">
+         <img class="login-img2" src="../assets/img/101.png" />
+         <el-input type="text" v-model="formInofo.userName" class="login-input" placeholder="请输入用户名"></el-input>
+       </span>
+       <span class="login-span">
+         <img class="login-img2" src="../assets/img/103.png"/>
+         <el-input type="password" v-model="formInofo.psd"  class="login-input" placeholder="请输入密码"></el-input>
+       </span>
+       <el-button class="login-btn" @click="msgalert()">登录</el-button>
+       <div class="regDiv"><router-link to="/register">还没账号？点我去注册</router-link></div>
+     </el-form>
+     <p class="login-p">Copyright © 2017-2017 两个个登录账号信息：(1,1,1)、(0,zero,0)</p>
+   </div>
+</div>
+  
 </template>
 
 <script>
+import { api } from '@/global/api.js'//引入静态资源
 export default {
   name: 'login',
   data: function() {
@@ -44,7 +48,7 @@ export default {
       }else if(this.formInofo.orgCode !== "" && this.formInofo.userName !== "" && this.formInofo.psd !== ""){
         let current = this.formInofo;
         let mark = 0;
-        this.$http.get('../../../static/dataJson/login.json').then(function(res){
+        this.$http.get(api.login).then(function(res){
           for(let i = 0; i <= res.data.data.length-1; i++){
             if(current.orgCode === res.data.data[i].orgCode && current.userName === res.data.data[i].userName && current.psd === res.data.data[i].psd&&mark==0){
                 mark=1;
@@ -69,11 +73,11 @@ export default {
 </script>
 
 <style>
-      body {
+      #login body {
         margin: 0px;
       }
       
-      .login {
+      #login .login {
         margin: 0px;
         padding: 0px;
         background: url("../assets/img/login01.jpg") 0% 0% / cover no-repeat;
@@ -83,7 +87,7 @@ export default {
         height: auto;
       }
       
-      .login-content {
+      #login .login-content {
         height: 386px;
         width: 495px;
         background: white;
@@ -94,7 +98,7 @@ export default {
         right: 0;
       }
       
-      .login-tip {
+      #login .login-tip {
         background: white;
         width: 200px;
         height: 65px;
@@ -102,13 +106,13 @@ export default {
         margin-left: 45%;
       }
       
-      .login-img {
+      #login .login-img {
         text-align: center;
         margin-top: 45px;
         margin-bottom: 15px;
       }
       
-      .login-span {
+      #login .login-span {
         display: block;
         width: 350px;
         height: 47px;
@@ -117,13 +121,13 @@ export default {
         margin-bottom: 15px;
       }
       
-      .login-img2 {
+      #login .login-img2 {
         display: inline-block;
         line-height: 36px;
         margin-right: 15px;
       }
       
-      .login-input {
+      #login .login-input {
         width: 300px;
         height: 45px;
         border: none;
@@ -133,11 +137,11 @@ export default {
         position: relative;
       }
       
-      .login-input:focus {
+      #login .login-input:focus {
         border: 1px #999 solid;
       }
       
-      .login-btn {
+      #login .login-btn {
         background: #21D081;
         color: #ffffff;
         width: 354px;
@@ -147,22 +151,22 @@ export default {
         margin: 0px 70px 0px 80px;
       }
       
-      .login-btn:hover {
+      #login .login-btn:hover {
         color: #4CD786;
         border: 0px;
       }
       
-      .login .login-p {
+      #login .login .login-p {
         text-align: center;
         margin-top: -105px;
         color: #999;
         font-size: 12px;
       }
-      .login .regDiv{
+      #login .login .regDiv{
         text-align: center;
         margin-top:30px;
       }
-      .login .regDiv a{
+      #login .login .regDiv a{
         color:#18A0F4;
         font-size:14px;
       }

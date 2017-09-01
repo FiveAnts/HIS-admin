@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id='patientDetails'>
   <div class="left">
 		<el-card class="lt-card">
 			<div style="width: 110px;">
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { api } from '@/global/api.js'//引入静态资源
 export default {
   data: function () {
     return {
@@ -80,7 +81,7 @@ export default {
   },
   methods: {
     getList() {
-      this.$http.get("../../../static/dataJson/patientDetails.json").then(function(res){
+      this.$http.get(api.patientDetails).then(function(res){
         // this.$message('Hello, welcome to my world.');
         this.current = res.data[0];
         this.record = res.data[0].record;
@@ -95,47 +96,47 @@ export default {
 </script>
 
 <style>
-.left{
+#patientDetails .left{
   width: 68%;
   float: left;
 }
-.right{
+#patientDetails .right{
   width: 30%;
   float: left;
 }
-.lt-card{
+#patientDetails .lt-card{
   width:  100%;
   display: inline-block;
   float: left;
 }
-.pd-lt-p{
+#patientDetails .pd-lt-p{
   margin-top: 30px;
   color: #C6C6C6;
 }
-.pd-lt-span{
+#patientDetails .pd-lt-span{
   color: #7F8787;
   margin-left: 8px;
 }
-.lb-card{
+#patientDetails .lb-card{
   width: 100%;
   display: inline-block;
   margin-top: 5px;
 }
-.pd-lb-span{
+#patientDetails .pd-lb-span{
   color: #7F8787;
   margin-right: 5px;
 }
-.rt-card{
+#patientDetails .rt-card{
   display: inline-block;
   width: 100%;
   margin-left: 2%;
 }
-.rc-card{
+#patientDetails .rc-card{
   width: 100%;
   margin-top: 5px;
   margin-left: 2%;
 }
-.rb-card{
+#patientDetails .rb-card{
   margin-top: 5px;
   width: 100%;
   margin-left: 2%;

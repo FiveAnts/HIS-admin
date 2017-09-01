@@ -272,6 +272,7 @@
 </template>
 
 <script>
+import { api } from '@/global/api.js'//引入静态资源
 import 	Vue from 'vue'
 import echart from "../../static/echarts.common.min.js"
  export default{
@@ -288,7 +289,7 @@ import echart from "../../static/echarts.common.min.js"
 		    getData:function(){
 		      	let me = this;
 
-		      	Vue.http.get('../../../static/json/ql-clinicData.json').then(function(response){
+		      	Vue.http.get(api.clinicData).then(function(response){
 		      		me.ysHZ = response.data.data.countHz1;
 		      		me.ysMX = response.data.data.countMx1;
 

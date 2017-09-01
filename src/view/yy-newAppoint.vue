@@ -138,6 +138,7 @@
 </style>
 
 <script>
+    import { api } from '@/global/api.js'//引入静态资源
 	import Vue from 'vue' 
 	export default {
 	    data() {
@@ -156,7 +157,7 @@
 			// 读取json数据
 			getData:function(){
 				let re = this;
-				Vue.http.get('../static/json/yy-appointment.json').then(function(response){
+				Vue.http.get(api.appointment).then(function(response){
 					re.patientData = response.data.appointment.patientData[0];
 				},function(){
 					alert('申请失败！');

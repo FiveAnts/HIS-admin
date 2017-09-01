@@ -505,6 +505,7 @@
 </style>
 
 <script>
+    import { api } from '@/global/api.js'//引入静态资源
 	import Vue from 'vue' 
 	export default {
 	    data() {
@@ -731,7 +732,7 @@
 		    },
 		    getData:function(){
 		    	let re = this;
-		    	Vue.http.get('../static/json/yy-appointment.json').then(function(response){
+		    	Vue.http.get(api.appointment).then(function(response){
 		    		re.doctorData = response.data.appointment.doctorData[0];
 		    		re.tableData = response.data.appointment.tableData;
 		    		re.doctorName = response.data.appointment.doctorName;

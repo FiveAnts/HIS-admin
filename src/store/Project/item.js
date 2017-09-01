@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { api } from '@/global/api.js'//引入静态资源
 const item={
 	 // 存储状态值
 	state: {
@@ -11,7 +12,7 @@ const item={
 		getData(state){
 			let k= state;
 			//采用this.$http才不用导入vue
-			Vue.http.get('../../../static/dataJson/Project/item.json').then(function(response){
+			Vue.http.get(api.item).then(function(response){
 				k.infoItems=response.data.infoItems;
 				k.classify=response.data.classify;
 			}, function(response){
